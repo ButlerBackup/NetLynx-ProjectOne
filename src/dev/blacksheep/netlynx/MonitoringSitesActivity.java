@@ -44,7 +44,19 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				TextView tvID = (TextView) view.findViewById(R.id.tvID);
-				startActivity(new Intent(MonitoringSitesActivity.this, HistoryActivity.class).putExtra(Consts.MONITORING_DEVICE_ID, tvID.getText().toString()));
+				TextView tvLocation = (TextView) view.findViewById(R.id.tvDevice);
+				TextView tvTime = (TextView) view.findViewById(R.id.tvTime);
+				TextView tvCurrent = (TextView) view.findViewById(R.id.tvCurrentDBA);
+				TextView tvOneHour = (TextView) view.findViewById(R.id.tvLEQ1hour);
+				TextView tvTwelveHour = (TextView) view.findViewById(R.id.tvLEQ12hour);
+				Intent i = new Intent(MonitoringSitesActivity.this, HistoryActivity.class);
+				i.putExtra(Consts.MONITORING_DEVICE_ID, tvID.getText().toString());
+				i.putExtra(Consts.MONITORING_DATE_TIME, tvTime.getText().toString());
+				i.putExtra(Consts.MONITORING_LOCATION, tvLocation.getText().toString());
+				i.putExtra(Consts.MONITORING_LEQ_FIVE_MINUTES, tvCurrent.getText().toString());
+				i.putExtra(Consts.MONITORING_LEQ_ONE_HOUR, tvOneHour.getText().toString());
+				i.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, tvTwelveHour.getText().toString());
+				startActivity(i);
 			}
 		});
 		// setContentView(R.layout.progress_loading);
@@ -57,6 +69,10 @@ public class MonitoringSitesActivity extends SherlockActivity {
 		switch (item.getItemId()) {
 		case R.id.menu_settings:
 			startActivity(new Intent(MonitoringSitesActivity.this, SettingsActivity.class));
+			break;
+		case R.id.menu_monitoring_alert:
+			startActivity(new Intent(MonitoringSitesActivity.this, AlertsActivity.class));
+			
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
