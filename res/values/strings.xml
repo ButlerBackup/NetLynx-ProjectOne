@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NetLynx</string>
+    <string name="alert_name">Alerts</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_refreh_text">Refresh</string>
+    <string name="menu_map_text">Update Location</string>
+    <string name="retreive_pin">Retrieve Pin</string>
+    <string name="check_pin">Check Pin</string>
+    <string name="phone_number_hint">Phone Number</string>
+    <string name="pin_hint">Enter PIN number</string>
+    <string name="gcm_id_retrieved_retrying">Retrying GCM ID broadcast..</string>
+    <string name="gcm_id_retrieved_waiting">Waiting for GCM ID broadcast..</string>
+    <string name="gcm_id_retrieved_successful">Successfully retrieved GCM ID</string>
+    <string name="gcm_id_retrieved_failed">Failed to retrieve GCM ID.</string>
+    <string name="welcome_activity_next">Let\'s Go!</string>
+    <string name="dba">dBA</string>
+    <string name="leq_one_hour">Leq 1hr : </string>
+    <string name="leq_twelve_hour">Leq 12hr : </string>
+    <string name="pref_vibration">Vibration</string>
+    <string name="pref_vibration_on">On</string>
+    <string name="pref_vibration_off">Off</string>
+    <string name="pref_housekeep_title">Housekeep Alert Message</string>
+    <string name="pref_housekeep_summary">Trim away old alert messages of more than X days</string>
+	<string name="site_location_show_text">Show Current Location</string>
+	<string name="menu_monitoring_alert_text">Show Alerts</string>
+	<string name="pref_timing_title">24 hour / AM PM</string>
+	<string name="pref_timing_summary">Show timing in AM/PM or in 24 hour</string>
+</resources>

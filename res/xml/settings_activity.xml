@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Settings" >
+        <RingtonePreference
+            android:key="pref_notification"
+            android:ringtoneType="notification"
+            android:showDefault="true"
+            android:title="Notification Tones" >
+        </RingtonePreference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_vibration"
+            android:summaryOff="@string/pref_vibration_off"
+            android:summaryOn="@string/pref_vibration_on"
+            android:title="@string/pref_vibration" />
+
+        <ListPreference
+            android:dialogTitle="How many days"
+            android:entries="@array/pref_housekeep_shown"
+            android:entryValues="@array/pref_housekeep_values"
+            android:key="pref_housekeep"
+            android:summary="@string/pref_housekeep_summary"
+            android:title="@string/pref_housekeep_title" />
+
+        <Preference
+            android:key="pref_test"
+            android:title="Test vibration and sound" />
+
+        <ListPreference
+            android:dialogTitle="Timing options"
+            android:entries="@array/pref_timing_shown"
+            android:entryValues="@array/pref_timing_values"
+            android:key="pref_timing"
+            android:summary="@string/pref_timing_summary"
+            android:title="@string/pref_timing_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:font="http://schemas.android.com/apk/res/dev.blacksheep.netlynx"
+    android:id="@+id/rl_alert_items"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvMessageID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:padding="8dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone" />
+
+    <dev.blacksheep.netlynx.classes.TextViewPlus
+        android:id="@+id/tvMessageSubject"
+        android:padding="2dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvMessageTime"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        font:customFont="roboto.ttf" />
+    <dev.blacksheep.netlynx.classes.TextViewPlus
+        android:id="@+id/tvMessageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvMessageBody"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvMessageSubject"
+        android:text="Large Text"
+        android:gravity="right"
+        android:padding="2dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        font:customFont="roboto.ttf" />
+
+    <dev.blacksheep.netlynx.classes.TextViewPlus
+        android:id="@+id/tvMessageBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvMessageTime"
+        android:padding="2dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        font:customFont="roboto.ttf" />
+
+    <View
+        android:id="@+id/separator"
+        android:padding="8dp"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_alignLeft="@+id/tvMessageTime"
+        android:layout_alignTop="@+id/tvMessageTime"
+        android:background="#33b5e5" />
+
+</RelativeLayout>
