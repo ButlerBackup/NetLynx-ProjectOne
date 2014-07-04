@@ -3,15 +3,17 @@ package dev.blacksheep.netlynx;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 
 import dev.blacksheep.netlynx.adapter.MonitoringSitesAdapter;
+import dev.blacksheep.netlynx.classes.ViewGroupUtils;
 import dev.blacksheep.netlynx.classes.WebRequestAPI;
 
 public class MonitoringSitesActivity extends SherlockActivity {
@@ -46,8 +49,6 @@ public class MonitoringSitesActivity extends SherlockActivity {
 				TextView tvCurrent = (TextView) view.findViewById(R.id.tvCurrentDBA);
 				TextView tvOneHour = (TextView) view.findViewById(R.id.tvLEQ1hour);
 				TextView tvTwelveHour = (TextView) view.findViewById(R.id.tvLEQ12hour);
-				TextView tvLocationLat = (TextView) view.findViewById(R.id.tvLocationLat);
-				TextView tvLocationLong = (TextView) view.findViewById(R.id.tvLocationLong);
 				Intent i = new Intent(MonitoringSitesActivity.this, HistoryActivity.class);
 				i.putExtra(Consts.MONITORING_DEVICE_ID, tvID.getText().toString());
 				i.putExtra(Consts.MONITORING_DATE_TIME, tvTime.getText().toString());
@@ -55,8 +56,6 @@ public class MonitoringSitesActivity extends SherlockActivity {
 				i.putExtra(Consts.MONITORING_LEQ_FIVE_MINUTES, tvCurrent.getText().toString());
 				i.putExtra(Consts.MONITORING_LEQ_ONE_HOUR, tvOneHour.getText().toString());
 				i.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, tvTwelveHour.getText().toString());
-				i.putExtra(Consts.MONITORING_LOCATION_LAT, tvLocationLat.getText().toString());
-				i.putExtra(Consts.MONITORING_LOCATION_LONG, tvLocationLong.getText().toString());
 				startActivity(i);
 			}
 		});
@@ -73,22 +72,12 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			break;
 		case R.id.menu_monitoring_alert:
 			startActivity(new Intent(MonitoringSitesActivity.this, AlertsActivity.class));
-
+			
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void showToast() {
-		LayoutInflater inflater = getLayoutInflater();
-		View layout = inflater.inflate(R.layout.progress_loading, (ViewGroup) findViewById(R.id.toast_layout_root));
-		Toast toast = new Toast(getApplicationContext());
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setView(layout);
-		toast.show();
 	}
 
 	@Override
