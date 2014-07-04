@@ -24,7 +24,8 @@ import dev.blacksheep.netlynx.classes.WebRequestAPI;
 public class HistoryActivity extends SherlockActivity {
 	private RefreshActionItem mRefreshActionItem;
 	ListView lvHistory;
-	String deviceID;
+	String deviceID, latitude, longitude;
+	Intent i;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +35,15 @@ public class HistoryActivity extends SherlockActivity {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setTitle("12 Hour History");
 		setContentView(R.layout.history_activity_layout);
-		Intent i = getIntent();
+		i = getIntent();
 		deviceID = i.getStringExtra(Consts.MONITORING_DEVICE_ID);
 		((TextView) findViewById(R.id.tvTime)).setText(i.getStringExtra(Consts.MONITORING_DATE_TIME));
 		((TextView) findViewById(R.id.tvDevice)).setText(i.getStringExtra(Consts.MONITORING_LOCATION));
 		((TextView) findViewById(R.id.tvCurrentDBA)).setText(i.getStringExtra(Consts.MONITORING_LEQ_FIVE_MINUTES));
 		((TextView) findViewById(R.id.tvLEQ1hour)).setText(i.getStringExtra(Consts.MONITORING_LEQ_ONE_HOUR));
 		((TextView) findViewById(R.id.tvLEQ12hour)).setText(i.getStringExtra(Consts.MONITORING_LEQ_TWELVE_HOUR));
-		
 		lvHistory = (ListView) findViewById(R.id.lvHistory);
+		supportInvalidateOptionsMenu();
 		getHistory();
 	}
 
@@ -53,9 +54,19 @@ public class HistoryActivity extends SherlockActivity {
 			finish();
 			break;
 		case R.id.menu_map:
-			startActivity(new Intent(HistoryActivity.this, SiteLocationActivity.class));
+			Intent in = new Intent(HistoryActivity.this, SiteLocationActivity.class);
+			in.putExtra(Consts.MONITORING_DEVICE_ID, i.getStringExtra(Consts.MONITORING_DEVICE_ID).toString());
+			in.putExtra(Consts.MONITORING_DATE_TIME, i.getStringExtra(Consts.MONITORING_DATE_TIME).toString());
+			in.putExtra(Consts.MONITORING_LOCATION, i.getStringExtra(Consts.MONITORING_LOCATION).toString());
+			in.putExtra(Consts.MONITORING_LEQ_FIVE_MINUTES, i.getStringExtra(Consts.MONITORING_LEQ_FIVE_MINUTES).toString());
+			in.putExtra(Consts.MONITORING_LEQ_ONE_HOUR, i.getStringExtra(Consts.MONITORING_LEQ_ONE_HOUR).toString());
+			in.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, i.getStringExtra(Consts.MONITORING_LEQ_TWELVE_HOUR).toString());
+			in.putExtra(Consts.MONITORING_LOCATION_LAT, i.getStringExtra(Consts.MONITORING_LOCATION_LAT).toString());
+			in.putExtra(Consts.MONITORING_LOCATION_LONG, i.getStringExtra(Consts.MONITORING_LOCATION_LONG).toString());
+			startActivity(in);
 			break;
-
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -99,7 +99,10 @@ public class AlertsActivity extends SherlockActivity {
 								Toast.makeText(AlertsActivity.this, "Unable to retreive data", Toast.LENGTH_SHORT).show();
 							}
 						}
-						mRefreshActionItem.showProgress(false);
+						try {
+							mRefreshActionItem.showProgress(false);
+						} catch (Exception e) {
+						}
 					}
 				});
 			}
