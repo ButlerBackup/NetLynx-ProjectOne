@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import dev.blacksheep.netlynx.Consts;
 import dev.blacksheep.netlynx.R;
-import dev.blacksheep.netlynx.SiteLocationActivity;
 import dev.blacksheep.netlynx.classes.Utils;
 
 public class MonitoringSitesAdapter extends BaseAdapter {
@@ -56,7 +54,7 @@ public class MonitoringSitesAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		final ViewHolder holder;
+		ViewHolder holder;
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.monitoring_sites_item, null);
 			holder = new ViewHolder();
@@ -87,23 +85,6 @@ public class MonitoringSitesAdapter extends BaseAdapter {
 		if (item.get(Consts.MONITORING_ALERT).equals(Consts.MONITORING_ALERT_YES)) {
 			holder.view1.setBackgroundColor(Color.parseColor("#FF0000"));
 		}
-
-		holder.tvDevice.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(context, SiteLocationActivity.class);
-				i.putExtra(Consts.MONITORING_DEVICE_ID, holder.tvID.getText().toString());
-				i.putExtra(Consts.MONITORING_DATE_TIME, holder.tvTime.getText().toString());
-				i.putExtra(Consts.MONITORING_LOCATION, holder.tvDevice.getText().toString());
-				i.putExtra(Consts.MONITORING_LEQ_FIVE_MINUTES, holder.tvCurrentDBA.getText().toString());
-				i.putExtra(Consts.MONITORING_LEQ_ONE_HOUR, holder.tvLEQ1hour.getText().toString());
-				i.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, holder.tvLEQ12hour.getText().toString());
-				i.putExtra(Consts.MONITORING_LOCATION_LAT, holder.tvLocationLat.getText().toString());
-				i.putExtra(Consts.MONITORING_LOCATION_LONG, holder.tvLocationLong.getText().toString());
-				context.startActivity(i);
-			}
-		});
 		return convertView;
 	}
 }

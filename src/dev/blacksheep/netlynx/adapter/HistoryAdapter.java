@@ -6,7 +6,6 @@ import java.util.HashMap;
 import com.koushikdutta.async.Util;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,7 @@ public class HistoryAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView tvTime;
 		TextView tvLEQ;
-		View view1;
+		RelativeLayout rl_history_items;
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class HistoryAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			holder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 			holder.tvLEQ = (TextView) convertView.findViewById(R.id.tvLEQ);
-			holder.view1 = (View) convertView.findViewById(R.id.view1);
+			holder.rl_history_items = (RelativeLayout) convertView.findViewById(R.id.rl_history_items);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -67,7 +66,10 @@ public class HistoryAdapter extends BaseAdapter {
 		holder.tvTime.setText(new Utils(context).parseDatetime(item.get(Consts.HISTORY_DATETIMESTAMP)));
 		holder.tvLEQ.setText(item.get(Consts.MONITORING_LEQ_FIVE_MINUTES));
 		if (item.get(Consts.MONITORING_ALERT).equals(Consts.MONITORING_ALERT_YES)) {
-			holder.view1.setBackgroundColor(Color.parseColor("#FF0000"));
+			holder.rl_history_items.setBackgroundResource(R.drawable.card_alert);
+		} else {
+			holder.rl_history_items.setBackgroundResource(R.drawable.card_normal);
+			
 		}
 		return convertView;
 	}

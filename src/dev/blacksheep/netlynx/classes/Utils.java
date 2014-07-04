@@ -93,9 +93,9 @@ public class Utils {
 		try {
 			SimpleDateFormat outFormatter;
 			if (sp.getString("pref_timing", "1").equals("1")) {
-				outFormatter = new SimpleDateFormat("d MMMM yyyy HH:mm", Locale.getDefault());
+				outFormatter = new SimpleDateFormat("d MMMM yyyy H:mm", Locale.getDefault());
 			} else {
-				outFormatter = new SimpleDateFormat("d MMMM yyyy KK:mma", Locale.getDefault());
+				outFormatter = new SimpleDateFormat("d MMMM yyyy K:mma", Locale.getDefault());
 			}
 			Date d = sdf.parse(datetime);
 			return outFormatter.format(d).toString();
