@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -18,11 +20,13 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.securepreferences.SecurePreferences;
 
+import dev.blacksheep.netlynx.AlertsActivity;
 import dev.blacksheep.netlynx.Consts;
 import dev.blacksheep.netlynx.R;
 
@@ -95,7 +99,7 @@ public class Utils {
 
 	public String parseDatetime(String datetime) {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-		Log.e("DATE DATE", sp.getString("pref_timing", "1"));
+		// Log.e("DATE DATE", sp.getString("pref_timing", "1"));
 		final String pattern = "yyyy-MM-dd'T'hh:mm:ss";
 		final SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
 		try {
@@ -121,7 +125,7 @@ public class Utils {
 			Log.e("SECOND NUMBER", matcher.group(2));
 		}
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-		Log.e("DATE DATE", sp.getString("pref_timing", "1"));
+		// Log.e("DATE DATE", sp.getString("pref_timing", "1"));
 		final String pattern = "hh:mm";
 		final SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
 		try {
@@ -139,12 +143,22 @@ public class Utils {
 	}
 
 	public void showNotifications(String shortTitle, String title, String message) {
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification notif = new Notification(R.drawable.ic_launcher, shortTitle, System.currentTimeMillis());
-		notif.setLatestEventInfo(context, title, message, null);
+		SecurePreferences sp = new SecurePreferences(context);
+		long[] vibration;
+		if (sp.getBoolean("pref_vibration", false)) {
+			vibration = new long[] { 100, 250, 100, 500 };
+		} else {
+			vibration = new long[] { 0 };
+		}
+		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		Intent myIntent = new Intent(context, AlertsActivity.class);
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		// ---100ms delay, vibrate for 250ms, pause for 100 ms and then vibrate for 500ms---
-		notif.vibrate = new long[] { 100, 250, 100, 500 };
-		nm.notify(111, notif);
+		Notification myNotification = new NotificationCompat.Builder(context).setContentTitle("Exercise of Notification!").setContentText("http://android-er.blogspot.com/").setTicker("Notification!")
+				.setWhen(System.currentTimeMillis()).setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher)
+				.setVibrate(vibration).build();
+
+		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(999, myNotification);
 	}
 }

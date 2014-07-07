@@ -3,6 +3,7 @@
 
     <PreferenceCategory android:title="Settings" >
         <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
             android:key="pref_notification"
             android:ringtoneType="notification"
             android:showDefault="true"
@@ -29,8 +30,8 @@
             android:title="Test vibration and sound" />
 
         <ListPreference
-            android:dialogTitle="Timing options"
             android:defaultValue="1"
+            android:dialogTitle="Timing options"
             android:entries="@array/pref_timing_shown"
             android:entryValues="@array/pref_timing_values"
             android:key="pref_timing"

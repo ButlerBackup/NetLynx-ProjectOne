@@ -201,7 +201,7 @@ public class WebRequestAPI {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.dotNet = true;
 		envelope.setOutputSoapObject(rpc);
-		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL);
+		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL, Consts.WEBREQUEST_TIMEOUT);  // 20 seconds timeout
 		ht.debug = true;
 		try {
 			Log.e("WebRequest", "TRY!");

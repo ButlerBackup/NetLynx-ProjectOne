@@ -4,3 +4,5 @@
 - [ ] Date format on threshold
 - [ ] GCM Notification to open alert
 - [ ] Alerts to store and make sure old alerts are not alerting users again
+- [ ] Get current location to update
+- [ ] Needs more error handling

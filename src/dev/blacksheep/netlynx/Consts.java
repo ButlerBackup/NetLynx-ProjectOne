@@ -2,6 +2,7 @@ package dev.blacksheep.netlynx;
 
 public class Consts {
 
+	final static public int WEBREQUEST_TIMEOUT = 20000;
 	// http://192.168.10.8/wsNoiseLynx/noiselynx.asmx'
 	final static public String NOISELYNX_API_URL = "http://192.168.10.8/wsNoiseLynx/noiselynx.asmx";
 	final static public String NOISELYNX_API_REQUESTPIN_SOAP_ACTION = "http://NetlynxTech.com/RequestPIN";
