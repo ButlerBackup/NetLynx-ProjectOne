@@ -1,0 +1,6 @@
+- [ ] Icon/logo
+- [ ] Map type (hybrid, terrain, satellite?)
+- [ ] Some layouts
+- [ ] Date format on threshold
+- [ ] GCM Notification to open alert
+- [ ] Alerts to store and make sure old alerts are not alerting users again

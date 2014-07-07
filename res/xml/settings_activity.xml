@@ -30,6 +30,7 @@
 
         <ListPreference
             android:dialogTitle="Timing options"
+            android:defaultValue="1"
             android:entries="@array/pref_timing_shown"
             android:entryValues="@array/pref_timing_values"
             android:key="pref_timing"

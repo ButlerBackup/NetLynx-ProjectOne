@@ -139,6 +139,7 @@ public class CheckPinActivity extends SherlockActivity {
 					}
 					GCM_register_ID = gcm.register(PROJECT_NUMBER);
 					Log.e("RegisteredID", GCM_register_ID);
+					new Utils(CheckPinActivity.this).setGCMID(GCM_register_ID);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

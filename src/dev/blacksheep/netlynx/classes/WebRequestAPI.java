@@ -251,8 +251,10 @@ public class WebRequestAPI {
 			SoapObject result = (SoapObject) envelope.getResponse();
 			for (int i = 0; i < result.getPropertyCount(); i++) {
 				SoapObject object = (SoapObject) result.getProperty(i);
+				// String timestamp = new Utils(context).parseTimeOnly(object.getProperty(Consts.THRESHOLD_TIMESPAN).toString());
+				String timestamp = object.getProperty(Consts.THRESHOLD_TIMESPAN).toString();
 				Log.e("THRESHOLD", object.getProperty(Consts.THRESHOLD_TIMESPAN).toString() + "|" + object.getProperty(Consts.THRESHOLD_THRESHOLD).toString());
-				list.add(object.getProperty(Consts.THRESHOLD_TIMESPAN).toString() + "|" + object.getProperty(Consts.THRESHOLD_THRESHOLD).toString());
+				list.add(timestamp + " : " + object.getProperty(Consts.THRESHOLD_THRESHOLD).toString() + " dBA");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

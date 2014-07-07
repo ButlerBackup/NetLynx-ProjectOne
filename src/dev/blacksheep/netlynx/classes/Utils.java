@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -29,6 +31,11 @@ public class Utils {
 
 	public Utils(Context context) {
 		this.context = context;
+	}
+
+	public void setGCMID(String id) {
+		SecurePreferences sp = new SecurePreferences(context);
+		sp.edit().putString(Consts.PREFERENCES_GCMID, id).commit();
 	}
 
 	public String getDeviceId() {
@@ -102,6 +109,32 @@ public class Utils {
 			return outFormatter.format(d).toString();
 		} catch (Exception e) {
 			return datetime;
+		}
+	}
+
+	public String parseTimeOnly(String time) {
+		Pattern mpattern = Pattern.compile("^(.*?):.*? - (.*?):.*?$", Pattern.CASE_INSENSITIVE);
+		Matcher matcher = mpattern.matcher(time);
+		// using Matcher find(), group(), start() and end() methods
+		if (matcher.find()) {
+			Log.e("FIRST NUMBER", matcher.group(1));
+			Log.e("SECOND NUMBER", matcher.group(2));
+		}
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		Log.e("DATE DATE", sp.getString("pref_timing", "1"));
+		final String pattern = "hh:mm";
+		final SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
+		try {
+			SimpleDateFormat outFormatter;
+			if (sp.getString("pref_timing", "1").equals("1")) {
+				outFormatter = new SimpleDateFormat("HH:mm - HH:mm", Locale.getDefault());
+			} else {
+				outFormatter = new SimpleDateFormat("KK:mma - KK:mma", Locale.getDefault());
+			}
+			Date d = sdf.parse(time);
+			return outFormatter.format(d).toString();
+		} catch (Exception e) {
+			return time;
 		}
 	}
 

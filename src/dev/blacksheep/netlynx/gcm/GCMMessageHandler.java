@@ -1,6 +1,8 @@
 package dev.blacksheep.netlynx.gcm;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+import dev.blacksheep.netlynx.classes.Utils;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,18 +12,10 @@ import android.widget.Toast;
 
 public class GCMMessageHandler extends IntentService {
 
-	String mes;
-	private Handler handler;
+	String TAG = "GCMMessageHandler";
 
 	public GCMMessageHandler() {
 		super("GcmMessageHandler");
-	}
-
-	@Override
-	public void onCreate() {
-		// TODO Auto-generated method stub
-		super.onCreate();
-		handler = new Handler();
 	}
 
 	@Override
@@ -33,20 +27,26 @@ public class GCMMessageHandler extends IntentService {
 		// in your BroadcastReceiver.
 		String messageType = gcm.getMessageType(intent);
 
-		mes = extras.getString("title");
-		showToast();
-		Log.i("GCM", "Received : (" + messageType + ")  " + extras.getString("title"));
-
+		if (!extras.isEmpty()) { // has effect of unparcelling Bundle
+			/*
+			 * Filter messages based on message type. Since it is likely that GCM will be extended in the future with new message types, just ignore any message types you're not interested in, or that
+			 * you don't recognize.
+			 */
+			if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
+				sendNotification("Send error: " + extras.toString());
+			} else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
+				sendNotification("Deleted messages on server: " + extras.toString());
+				// If it's a regular GCM message, do some work.
+			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
+				sendNotification("Received: " + extras.toString());
+				Log.e(TAG, "Received: " + extras.toString());
+			}
+		}
+		// Release the wake lock provided by the WakefulBroadcastReceiver.
 		GCMBroadcastReceiver.completeWakefulIntent(intent);
-
 	}
 
-	public void showToast() {
-		handler.post(new Runnable() {
-			public void run() {
-				Toast.makeText(getApplicationContext(), mes, Toast.LENGTH_LONG).show();
-			}
-		});
-
+	private void sendNotification(String msg) {
+		new Utils(this).showNotifications("New Message", "Title", msg);
 	}
 }

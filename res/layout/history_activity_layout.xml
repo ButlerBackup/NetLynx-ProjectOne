@@ -205,6 +205,8 @@
             android:layout_alignLeft="@+id/TextViewPlus02"
             android:layout_alignRight="@+id/View01"
             android:layout_below="@+id/TextViewPlus02"
+            android:gravity="center"
+            android:paddingRight="10dp"
             android:text="Loading.."
             android:textAppearance="?android:attr/textAppearanceMedium"
             font:customFont="roboto.ttf" />
@@ -216,6 +218,8 @@
             android:layout_alignLeft="@+id/tvThresholdOne"
             android:layout_alignRight="@+id/tvThresholdOne"
             android:layout_below="@+id/tvThresholdOne"
+            android:gravity="center"
+            android:paddingRight="10dp"
             android:text="Loading.."
             android:textAppearance="?android:attr/textAppearanceMedium"
             font:customFont="roboto.ttf" />
@@ -227,6 +231,8 @@
             android:layout_alignLeft="@+id/tvThresholdTwo"
             android:layout_alignRight="@+id/tvThresholdTwo"
             android:layout_below="@+id/tvThresholdTwo"
+            android:gravity="center"
+            android:paddingRight="10dp"
             android:text="Loading.."
             android:textAppearance="?android:attr/textAppearanceMedium"
             font:customFont="roboto.ttf" />

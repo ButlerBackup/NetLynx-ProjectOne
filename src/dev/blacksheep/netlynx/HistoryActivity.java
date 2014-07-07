@@ -95,6 +95,7 @@ public class HistoryActivity extends SherlockActivity {
 							@Override
 							public void run() {
 								getHistory();
+								getThreshold();
 							}
 						});
 					}
