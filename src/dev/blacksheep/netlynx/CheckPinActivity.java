@@ -16,6 +16,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.koushikdutta.async.Util;
 
 import dev.blacksheep.netlynx.classes.ProgressGenerator;
 import dev.blacksheep.netlynx.classes.ProgressGenerator.OnCompleteListener;
@@ -132,6 +133,7 @@ public class CheckPinActivity extends SherlockActivity {
 			@Override
 			protected Void doInBackground(Void... params) {
 				try {
+					new Utils(CheckPinActivity.this).getDeviceId();
 					if (gcm == null) {
 						gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 					}

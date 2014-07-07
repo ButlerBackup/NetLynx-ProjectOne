@@ -14,6 +14,8 @@ public class Consts {
 	final static public String NOISELYNX_API_GETHISTORY_METHOD_NAME = "GetHistory";
 	final static public String NOISELYNX_API_GETMESSAGES_SOAP_ACTION = "http://NetlynxTech.com/GetNewMessages";
 	final static public String NOISELYNX_API_GETMESSAGES_METHOD_NAME = "GetNewMessages";
+	final static public String NOISELYNX_API_GETTHRESHOLD_SOAP_ACTION = "http://NetlynxTech.com/GetThreshold";
+	final static public String NOISELYNX_API_GETTHRESHOLD_METHOD_NAME = "GetThreshold";
 	final static public String NAMESPACE = "http://NetlynxTech.com/";
 
 	final static public String PREFERENCES_PHONE_NO = "phone";
@@ -38,6 +40,9 @@ public class Consts {
 	final static public String MESSAGES_MESSAGE_SUBJECT = "Subject";
 	final static public String MESSAGES_MESSAGE_BODY = "Message";
 	final static public String MESSAGES_MESSAGE_PRIORITY = "Priority";
+	
+	final static public String THRESHOLD_TIMESPAN = "TimeSpan";
+	final static public String THRESHOLD_THRESHOLD = "Threhold"; //GRAMMAR ERROR CAREFUL
 	// GetDevices http://NetlynxTech.com/GetDevices
 	// GetHistory http://NetlynxTech.com/GetHistory
 	// GetNewMessages http://NetlynxTech.com/GetNewMessages

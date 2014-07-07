@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -32,20 +31,22 @@ public class Utils {
 		this.context = context;
 	}
 
-	@SuppressLint("NewApi")
 	public String getDeviceId() {
+		SecurePreferences sp = new SecurePreferences(context);
 		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 		final String deviceId = tm.getDeviceId();
 		if (deviceId != null) {
+			sp.edit().putString(Consts.PREFERENCES_UDID, deviceId).commit();
 			return deviceId;
 		} else {
+			sp.edit().putString(Consts.PREFERENCES_UDID, android.os.Build.SERIAL).commit();
 			return android.os.Build.SERIAL;
 		}
 	}
 
 	public String getUDID() {
 		SecurePreferences sp = new SecurePreferences(context);
-		return sp.getString(Consts.PREFERENCES_PHONE_NO, "0");
+		return sp.getString(Consts.PREFERENCES_UDID, "0");
 	}
 
 	private MediaPlayer mMediaPlayer;
@@ -93,9 +94,9 @@ public class Utils {
 		try {
 			SimpleDateFormat outFormatter;
 			if (sp.getString("pref_timing", "1").equals("1")) {
-				outFormatter = new SimpleDateFormat("d MMMM yyyy H:mm", Locale.getDefault());
+				outFormatter = new SimpleDateFormat("d MMMM yyyy HH:mm", Locale.getDefault());
 			} else {
-				outFormatter = new SimpleDateFormat("d MMMM yyyy K:mma", Locale.getDefault());
+				outFormatter = new SimpleDateFormat("d MMMM yyyy KK:mma", Locale.getDefault());
 			}
 			Date d = sdf.parse(datetime);
 			return outFormatter.format(d).toString();

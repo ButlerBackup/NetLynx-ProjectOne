@@ -3,17 +3,15 @@ package dev.blacksheep.netlynx;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +24,6 @@ import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 
 import dev.blacksheep.netlynx.adapter.MonitoringSitesAdapter;
-import dev.blacksheep.netlynx.classes.ViewGroupUtils;
 import dev.blacksheep.netlynx.classes.WebRequestAPI;
 
 public class MonitoringSitesActivity extends SherlockActivity {
@@ -44,14 +41,13 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				TextView tvID = (TextView) view.findViewById(R.id.tvID);
-<<<<<<< HEAD
-				startActivity(new Intent(MonitoringSitesActivity.this, HistoryActivity.class).putExtra(Consts.MONITORING_DEVICE_ID, tvID.getText().toString()));
-=======
 				TextView tvLocation = (TextView) view.findViewById(R.id.tvDevice);
 				TextView tvTime = (TextView) view.findViewById(R.id.tvTime);
 				TextView tvCurrent = (TextView) view.findViewById(R.id.tvCurrentDBA);
 				TextView tvOneHour = (TextView) view.findViewById(R.id.tvLEQ1hour);
 				TextView tvTwelveHour = (TextView) view.findViewById(R.id.tvLEQ12hour);
+				TextView tvLocationLat = (TextView) view.findViewById(R.id.tvLocationLat);
+				TextView tvLocationLong = (TextView) view.findViewById(R.id.tvLocationLong);
 				Intent i = new Intent(MonitoringSitesActivity.this, HistoryActivity.class);
 				i.putExtra(Consts.MONITORING_DEVICE_ID, tvID.getText().toString());
 				i.putExtra(Consts.MONITORING_DATE_TIME, tvTime.getText().toString());
@@ -59,8 +55,9 @@ public class MonitoringSitesActivity extends SherlockActivity {
 				i.putExtra(Consts.MONITORING_LEQ_FIVE_MINUTES, tvCurrent.getText().toString());
 				i.putExtra(Consts.MONITORING_LEQ_ONE_HOUR, tvOneHour.getText().toString());
 				i.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, tvTwelveHour.getText().toString());
+				i.putExtra(Consts.MONITORING_LOCATION_LAT, tvLocationLat.getText().toString());
+				i.putExtra(Consts.MONITORING_LOCATION_LONG, tvLocationLong.getText().toString());
 				startActivity(i);
->>>>>>> parent of 4fc2eb0... update
 			}
 		});
 		// setContentView(R.layout.progress_loading);
@@ -74,17 +71,24 @@ public class MonitoringSitesActivity extends SherlockActivity {
 		case R.id.menu_settings:
 			startActivity(new Intent(MonitoringSitesActivity.this, SettingsActivity.class));
 			break;
-<<<<<<< HEAD
-=======
 		case R.id.menu_monitoring_alert:
 			startActivity(new Intent(MonitoringSitesActivity.this, AlertsActivity.class));
-			
+
 			break;
->>>>>>> parent of 4fc2eb0... update
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void showToast() {
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.progress_loading, (ViewGroup) findViewById(R.id.toast_layout_root));
+		Toast toast = new Toast(getApplicationContext());
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setView(layout);
+		toast.show();
 	}
 
 	@Override

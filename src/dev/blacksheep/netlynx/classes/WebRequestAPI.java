@@ -14,7 +14,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 import dev.blacksheep.netlynx.Consts;
 
 public class WebRequestAPI {
@@ -137,7 +136,7 @@ public class WebRequestAPI {
 
 		} catch (SocketTimeoutException e) {
 			e.printStackTrace();
-			//Toast.makeText(context, "Timed out. Please try again", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(context, "Timed out. Please try again", Toast.LENGTH_SHORT).show();
 			// return "Timed out. Please try again.";
 		} catch (HttpResponseException e) {
 			e.printStackTrace();
@@ -235,4 +234,29 @@ public class WebRequestAPI {
 		return list;
 	}
 
+	public ArrayList<String> getThreshold(String deviceID) {
+		ArrayList<String> list = new ArrayList<String>();
+		SoapObject rpc = new SoapObject(Consts.NAMESPACE, Consts.NOISELYNX_API_GETTHRESHOLD_METHOD_NAME);
+		rpc.addProperty("UDID", new Utils(context).getDeviceId());
+		rpc.addProperty("deviceID", deviceID);
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.dotNet = true;
+		envelope.setOutputSoapObject(rpc);
+		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL);
+		ht.debug = true;
+		try {
+			Log.e("WebRequest", "TRY!");
+			ht.call(Consts.NOISELYNX_API_GETTHRESHOLD_SOAP_ACTION, envelope);
+			System.err.println(ht.responseDump);
+			SoapObject result = (SoapObject) envelope.getResponse();
+			for (int i = 0; i < result.getPropertyCount(); i++) {
+				SoapObject object = (SoapObject) result.getProperty(i);
+				Log.e("THRESHOLD", object.getProperty(Consts.THRESHOLD_TIMESPAN).toString() + "|" + object.getProperty(Consts.THRESHOLD_THRESHOLD).toString());
+				list.add(object.getProperty(Consts.THRESHOLD_TIMESPAN).toString() + "|" + object.getProperty(Consts.THRESHOLD_THRESHOLD).toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
