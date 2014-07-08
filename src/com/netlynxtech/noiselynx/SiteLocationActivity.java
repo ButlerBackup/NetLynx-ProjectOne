@@ -42,6 +42,7 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 		deviceID = i.getStringExtra(Consts.MONITORING_DEVICE_ID);
 		((TextView) findViewById(R.id.tvTime)).setText(i.getStringExtra(Consts.MONITORING_DATE_TIME));
 		((TextView) findViewById(R.id.tvDevice)).setText(i.getStringExtra(Consts.MONITORING_LOCATION));
+		getSupportActionBar().setTitle(i.getStringExtra(Consts.MONITORING_LOCATION));
 		((TextView) findViewById(R.id.tvCurrentDBA)).setText(i.getStringExtra(Consts.MONITORING_LEQ_FIVE_MINUTES));
 		((TextView) findViewById(R.id.tvLEQ1hour)).setText(i.getStringExtra(Consts.MONITORING_LEQ_ONE_HOUR));
 		((TextView) findViewById(R.id.tvLEQ12hour)).setText(i.getStringExtra(Consts.MONITORING_LEQ_TWELVE_HOUR));
@@ -80,7 +81,7 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-
+								bUpdateLocation.setEnabled(true);
 							}
 						}).show();
 			}
