@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:font="http://schemas.android.com/apk/res/dev.blacksheep.netlynx"
+    xmlns:font="http://schemas.android.com/apk/res/com.netlynxtech.noiselynx"
     android:id="@+id/rl_alert_items"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:visibility="gone" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvMessageSubject"
         android:padding="2dp"
         android:textStyle="bold"
@@ -30,7 +30,7 @@
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
         font:customFont="roboto.ttf" />
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvMessageTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvMessageBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

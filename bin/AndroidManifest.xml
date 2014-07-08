@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.blacksheep.netlynx"
+    package="com.netlynxtech.noiselynx"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -15,12 +15,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
-        android:name="com.hmkcode.android.gcm.permission.C2D_MESSAGE"
+        android:name="com.netlynxtech.noiselynx.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.hmkcode.android.gcm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.netlynxtech.noiselynx.permission.C2D_MESSAGE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -36,31 +37,31 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="dev.blacksheep.netlynx.MainActivity"
+            android:name="com.netlynxtech.noiselynx.MainActivity"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="dev.blacksheep.netlynx.CheckPinActivity" >
+        <activity android:name="com.netlynxtech.noiselynx.CheckPinActivity" >
         </activity>
-        <activity android:name="dev.blacksheep.netlynx.SettingsActivity" >
+        <activity android:name="com.netlynxtech.noiselynx.SettingsActivity" >
         </activity>
-        <activity android:name="dev.blacksheep.netlynx.WelcomeActivity" >
+        <activity android:name="com.netlynxtech.noiselynx.WelcomeActivity" >
         </activity>
-        <activity android:name="dev.blacksheep.netlynx.HistoryActivity" >
+        <activity android:name="com.netlynxtech.noiselynx.HistoryActivity" >
         </activity>
-        <activity android:name="dev.blacksheep.netlynx.SiteLocationActivity" >
+        <activity android:name="com.netlynxtech.noiselynx.SiteLocationActivity" >
         </activity>
-        <activity android:name="dev.blacksheep.netlynx.MonitoringSitesActivity" >
+        <activity android:name="com.netlynxtech.noiselynx.MonitoringSitesActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="dev.blacksheep.netlynx.AlertsActivity" >
+        <activity android:name="com.netlynxtech.noiselynx.AlertsActivity" >
         </activity>
 
         <receiver
-            android:name="dev.blacksheep.netlynx.gcm.GCMBroadcastReceiver"
+            android:name="com.netlynxtech.noiselynx.gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -69,14 +70,14 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="dev.blacksheep.netlynx.gcm.GCMMessageHandler" />
+        <service android:name="com.netlynxtech.noiselynx.gcm.GCMMessageHandler" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDFyNoxlDu1qgiwZC59RIFPwwGAxEBIHd8" />
+            android:value="AIzaSyDNQl7K1lVCWbsf_Ebo4hJPUATL6hiSm9U" />
     </application>
 
 </manifest>

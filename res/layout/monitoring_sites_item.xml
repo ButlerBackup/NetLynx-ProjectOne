@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:font="http://schemas.android.com/apk/res/dev.blacksheep.netlynx"
+    xmlns:font="http://schemas.android.com/apk/res/com.netlynxtech.noiselynx"
     android:id="@+id/rl_monitoring_site_items"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/card"
     android:orientation="vertical" >
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:visibility="gone"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvLocationLat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:visibility="gone"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvLocationLong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
         android:visibility="gone"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         android:textSize="40dp"
         android:textStyle="bold" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
         android:layout_alignTop="@+id/tvDevice"
         android:background="#FF00FF27" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
         android:text="TextView"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvLEQ12hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvLEQ1hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

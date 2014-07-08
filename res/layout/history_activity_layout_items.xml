@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:font="http://schemas.android.com/apk/res/dev.blacksheep.netlynx"
+    xmlns:font="http://schemas.android.com/apk/res/com.netlynxtech.noiselynx"
     android:id="@+id/rl_history_items"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/card"
     android:orientation="vertical" >
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         font:customFont="roboto.ttf" />
 
-    <dev.blacksheep.netlynx.classes.TextViewPlus
+    <com.netlynxtech.noiselynx.classes.TextViewPlus
         android:id="@+id/tvLEQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
     android:layout_alignParentTop="true"
     android:background="#FF00FF27" />
 
-<dev.blacksheep.netlynx.classes.TextViewPlus
+<com.netlynxtech.noiselynx.classes.TextViewPlus
     android:id="@+id/textView1"
     android:layout_width="wrap_content"
     android:paddingRight="5dp"
