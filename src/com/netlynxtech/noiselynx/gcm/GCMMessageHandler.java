@@ -1,14 +1,12 @@
 package com.netlynxtech.noiselynx.gcm;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.netlynxtech.noiselynx.classes.Utils;
-
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.netlynxtech.noiselynx.classes.Utils;
 
 public class GCMMessageHandler extends IntentService {
 

@@ -39,6 +39,11 @@
         <activity
             android:name="com.netlynxtech.noiselynx.MainActivity"
             android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.CheckPinActivity" >
         </activity>
@@ -51,11 +56,6 @@
         <activity android:name="com.netlynxtech.noiselynx.SiteLocationActivity" >
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.MonitoringSitesActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.AlertsActivity" >
         </activity>
@@ -77,7 +77,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDNQl7K1lVCWbsf_Ebo4hJPUATL6hiSm9U" />
+            android:value="AIzaSyAYZ2dWVJPVS3TJNt0lW7h9UPC5mHiS_xs" />
     </application>
 
 </manifest>

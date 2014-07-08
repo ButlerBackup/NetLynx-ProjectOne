@@ -79,7 +79,7 @@ public class WebRequestAPI {
 		try {
 			Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_CHECKPIN_SOAP_ACTION, envelope);
-			// System.err.println(ht.responseDump);
+			System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse();
 			// Log.e("COUNT", result.getPropertyCount() + "");
 			// Log.e("COUNT", result.getProperty(0).toString());
