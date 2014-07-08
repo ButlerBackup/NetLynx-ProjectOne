@@ -23,8 +23,11 @@
     <string name="pref_vibration_off">Off</string>
     <string name="pref_housekeep_title">Housekeep Alert Message</string>
     <string name="pref_housekeep_summary">Trim away old alert messages of more than X days</string>
-	<string name="site_location_show_text">Show Current Location</string>
+	<string name="site_location_show_text">Update device to Current Location</string>
 	<string name="menu_monitoring_alert_text">Show Alerts</string>
 	<string name="pref_timing_title">24 hour / AM PM</string>
 	<string name="pref_timing_summary">Show timing in AM/PM or in 24 hour</string>
+	<string name="pref_about_title">About Us</string>
+	<string name="pref_about_summary">NetLynx Technology Pte Ltd \u00A9 (Click for more info)</string>
+	<string name="pref_about_dialog_text"><![CDATA[NetLynx Technology is a software and hardware engineering company that focuses on the development and deployment of innovative products and solutions for the communications and automotive sectors.<br>Our mission is to deliver quality products and services to the marketplace, backed up by our dependable technical support.<br><br><b>Communications</b><br><br>Our communications department has been focusing the applications that tap on the services provided by the Service providers, such as SMS / GPRS / 3G / Voice, and even broadcast media such as Digital Video Broadcast, as well as GPS.<br><br><b>Automotive</b><br><br>Our Automotive department focuses on the automotive consumer electronics. We have introduced products such as GPS boxes, DVB Receivers and other electronic controls that caters to the demanding conditions of a vehicular environment.<br><br><b>Communications - Automotive Integration. Unlocking the potential of a connected Vehicle</b><br><br>We believe that the integration of communications and Automotive will be the next big advancement, similar to the merger of communications and information technology ( InfoComm ) a decade ago.]]></string>
 </resources>

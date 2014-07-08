@@ -38,5 +38,11 @@
             android:summary="@string/pref_timing_summary"
             android:title="@string/pref_timing_title" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Misc" >
+        <Preference
+            android:key="pref_about"
+            android:summary="@string/pref_about_summary"
+            android:title="@string/pref_about_title" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

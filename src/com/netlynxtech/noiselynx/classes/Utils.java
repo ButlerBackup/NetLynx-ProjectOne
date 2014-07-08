@@ -56,6 +56,7 @@ public class Utils {
 
 	public String getUDID() {
 		SecurePreferences sp = new SecurePreferences(context);
+		Log.e("DEVICE ID", sp.getString(Consts.PREFERENCES_UDID, "0"));
 		return sp.getString(Consts.PREFERENCES_UDID, "0");
 	}
 

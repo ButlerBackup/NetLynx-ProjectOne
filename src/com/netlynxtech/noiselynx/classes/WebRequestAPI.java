@@ -12,10 +12,11 @@ import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.netlynxtech.noiselynx.Consts;
-
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
+
+import com.netlynxtech.noiselynx.Consts;
 
 public class WebRequestAPI {
 	Context context;
@@ -202,7 +203,7 @@ public class WebRequestAPI {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.dotNet = true;
 		envelope.setOutputSoapObject(rpc);
-		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL, Consts.WEBREQUEST_TIMEOUT);  // 20 seconds timeout
+		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL, Consts.WEBREQUEST_TIMEOUT); // 20 seconds timeout
 		ht.debug = true;
 		try {
 			Log.e("WebRequest", "TRY!");
@@ -262,4 +263,42 @@ public class WebRequestAPI {
 		}
 		return list;
 	}
+
+	public String updateLocation(String deviceID, String latitude, String longitude) {
+		SoapObject rpc = new SoapObject(Consts.NAMESPACE, Consts.NOISELYNX_API_UPDATELATLONG_METHOD_NAME);
+		rpc.addProperty("UDID", new Utils(context).getUDID());
+		rpc.addProperty("deviceID", Integer.parseInt(deviceID));
+		rpc.addProperty("latitude", latitude);
+		rpc.addProperty("longitude", longitude);
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.dotNet = true;
+		envelope.setOutputSoapObject(rpc);
+		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL, Consts.WEBREQUEST_TIMEOUT); // 20 seconds timeout
+		ht.debug = true;
+		try {
+			Log.e("WebRequest", "TRY!");
+			ht.call(Consts.NOISELYNX_API_UPDATELATLONG_SOAP_ACTION, envelope);
+			System.err.println(ht.responseDump);
+			SoapObject result = (SoapObject) envelope.getResponse();
+			if (result.getProperty(0).toString().equals("1")) {
+				return "success|" + result.getProperty(1).toString();
+			} else {
+				return result.getProperty(1).toString();
+			}
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			// return "Timed out. Please try again.";
+		} catch (HttpResponseException e) {
+			e.printStackTrace();
+			// return e.getMessage();
+		} catch (IOException e) {
+			e.printStackTrace();
+			// return e.getMessage();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+			// return e.getMessage();
+		}
+		return "failed";
+	}
+
 }

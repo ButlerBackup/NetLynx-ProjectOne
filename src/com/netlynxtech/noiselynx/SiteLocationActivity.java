@@ -6,6 +6,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 	private SupportMapFragment mapFragment;
 	private GoogleMap googleMap;
 	double latitude, longitude;
-	String locationName = "";
+	String locationName = "", deviceID = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.site_location_activity);
 		Intent i = getIntent();
 		locationName = i.getStringExtra(Consts.MONITORING_LOCATION);
+		deviceID = i.getStringExtra(Consts.MONITORING_DEVICE_ID);
 		((TextView) findViewById(R.id.tvTime)).setText(i.getStringExtra(Consts.MONITORING_DATE_TIME));
 		((TextView) findViewById(R.id.tvDevice)).setText(i.getStringExtra(Consts.MONITORING_LOCATION));
 		((TextView) findViewById(R.id.tvCurrentDBA)).setText(i.getStringExtra(Consts.MONITORING_LEQ_FIVE_MINUTES));
@@ -52,10 +54,8 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 			@Override
 			public void onComplete() {
 				if (!bUpdateLocation.getText().toString().equals("Success")) {
-					bUpdateLocation.setEnabled(true);
-					bUpdateLocation.setProgress(0);
-				} else {
-					Toast.makeText(SiteLocationActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SiteLocationActivity.this, bUpdateLocation.getText().toString(), Toast.LENGTH_SHORT).show();
+					bUpdateLocation.setText(SiteLocationActivity.this.getResources().getString(R.string.site_location_show_text));
 				}
 			}
 		});
@@ -71,7 +71,10 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								Location loc = googleMap.getMyLocation();
-								Toast.makeText(SiteLocationActivity.this, loc.getLatitude() + "|" + loc.getLongitude(), Toast.LENGTH_SHORT).show();
+								if (loc != null) {
+									Log.e("Location", loc.getLatitude() + "|" + loc.getLongitude());
+									progressGenerator.updateLocation(bUpdateLocation, loc, deviceID, SiteLocationActivity.this);
+								}
 							}
 						}).setNegativeButton("No", new OnClickListener() {
 
@@ -80,7 +83,6 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 
 							}
 						}).show();
-				// progressGenerator.start(bUpdateLocation);
 			}
 		});
 		try {
@@ -88,7 +90,6 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// LocationLibrary.forceLocationUpdate(SiteLocationActivity.this);
 	}
 
 	private void initilizeMap() {

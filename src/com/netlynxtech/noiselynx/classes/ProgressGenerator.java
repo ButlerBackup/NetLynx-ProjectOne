@@ -3,6 +3,7 @@ package com.netlynxtech.noiselynx.classes;
 import java.util.Random;
 
 import android.content.Context;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
@@ -143,6 +144,53 @@ public class ProgressGenerator {
 					handler.postDelayed(this, generateDelay());
 				} else {
 					new checkPin().execute(pinNo, gcm_id);
+				}
+			}
+		});
+	}
+
+	private class updateLocation extends AsyncTask<String, Void, Void> {
+		String res = "";
+
+		@Override
+		protected Void doInBackground(String... str) {
+			res = new WebRequestAPI(context).updateLocation(str[0].toString(), str[1].toString(), str[2].toString());
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			if (res.contains("success|")) {
+				Log.e("onPostExecute", "success");
+				button.setProgress(100);
+				button.setText("Success");
+				button.setEnabled(false);
+			} else {
+				mProgress = 0;
+				button.setProgress(-1);
+				button.setText(res);
+				button.setEnabled(true);
+				Log.e("onPostExecute", "failed");
+			}
+			mListener.onComplete();
+		}
+
+	}
+
+	public void updateLocation(final ProcessButton button, final Location loc, final String deviceID, Context context) {
+		this.context = context;
+		this.button = button;
+		final Handler handler = new Handler();
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				mProgress += 25;
+				button.setProgress(mProgress);
+				if (mProgress < 74) {
+					handler.postDelayed(this, generateDelay());
+				} else {
+					new updateLocation().execute(deviceID, String.valueOf(loc.getLatitude()), String.valueOf(loc.getLongitude()));
 				}
 			}
 		});
