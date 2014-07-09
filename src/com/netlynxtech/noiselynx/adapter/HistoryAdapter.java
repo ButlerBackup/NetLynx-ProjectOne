@@ -66,6 +66,8 @@ public class HistoryAdapter extends BaseAdapter {
 		holder.tvLEQ.setText(item.get(Consts.MONITORING_LEQ_FIVE_MINUTES));
 		if (item.get(Consts.MONITORING_ALERT).equals(Consts.MONITORING_ALERT_YES)) {
 			holder.view1.setBackgroundColor(Color.parseColor("#FF0000"));
+		} else {
+			holder.view1.setBackgroundColor(Color.parseColor("#FF00FF27"));
 		}
 		return convertView;
 	}

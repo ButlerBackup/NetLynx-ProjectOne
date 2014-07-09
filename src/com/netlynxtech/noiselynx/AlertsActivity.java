@@ -6,7 +6,6 @@ import java.util.HashMap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -15,6 +14,7 @@ import com.manuelpeinado.refreshactionitem.ProgressIndicatorType;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 import com.netlynxtech.noiselynx.adapter.AlertsAdapter;
+import com.netlynxtech.noiselynx.classes.SQLFunctions;
 import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 
 public class AlertsActivity extends SherlockActivity {
@@ -91,16 +91,12 @@ public class AlertsActivity extends SherlockActivity {
 
 					@Override
 					public void run() {
-						if (data != null) {
-							if (data.size() > 0) {
-								lvAlerts.setAdapter(adapter);
-							} else {
-								Toast.makeText(AlertsActivity.this, "Unable to retreive data", Toast.LENGTH_SHORT).show();
-							}
-						}
 						try {
+							adapter = new AlertsAdapter(AlertsActivity.this, data);
+							lvAlerts.setAdapter(adapter);
 							mRefreshActionItem.showProgress(false);
 						} catch (Exception e) {
+							e.printStackTrace();
 						}
 					}
 				});
@@ -109,9 +105,11 @@ public class AlertsActivity extends SherlockActivity {
 			@Override
 			protected Void doInBackground(Void... params) {
 				try {
-					// ArrayList<HashMap<String, String>> data = new WebRequestAPI(MonitoringSitesActivity.this).getDevices(new Utils(MonitoringSitesActivity.this).getUDID());
-					data = new WebRequestAPI(AlertsActivity.this).getAlerts("123456");
-					adapter = new AlertsAdapter(AlertsActivity.this, data);
+					new WebRequestAPI(AlertsActivity.this).getAlerts("123456");
+					SQLFunctions sql = new SQLFunctions(AlertsActivity.this);
+					sql.open();
+					data = sql.loadMessages(); // get new messages, which insert the nwe get from DB
+					sql.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

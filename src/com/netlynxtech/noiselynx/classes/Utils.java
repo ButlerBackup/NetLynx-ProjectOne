@@ -61,6 +61,11 @@ public class Utils {
 		return sp.getString(Consts.PREFERENCES_UDID, "0");
 	}
 
+	public String getHousekeep() {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		return sp.getString("pref_housekeep", "5");
+	}
+
 	private MediaPlayer mMediaPlayer;
 
 	public void playNotificationSound() {
@@ -148,7 +153,7 @@ public class Utils {
 		final String pattern = "yyyy-MM-dd'T'HH:mm:ss";
 		final SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.ENGLISH);
 		try {
-			sdf.setTimeZone(TimeZone.getTimeZone(TimeZone.getDefault().getID())); // unble to get GMT + 8
+			sdf.setTimeZone(TimeZone.getTimeZone("GMT")); // unble to get GMT + 8
 			Date d = sdf.parse(datetime);
 			long unix = d.getTime() / 1000;
 			Log.e("TIME TO UNIX", String.valueOf(unix));
@@ -177,5 +182,71 @@ public class Utils {
 
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(999, myNotification);
+	}
+
+	private static final int SECOND_MILLIS = 1000;
+	private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
+	private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
+	private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
+
+	public static String getTimeAgo(long time, Context ctx) {
+		if (time < 1000000000000L) {
+			// if timestamp given in seconds, convert to millis
+			time *= 1000;
+		}
+
+		long now = System.currentTimeMillis();
+		if (time > now || time <= 0) {
+			return null;
+		}
+
+		// TODO: localize
+		final long diff = now - time;
+		if (diff < MINUTE_MILLIS) {
+			return "just now";
+		} else if (diff < 2 * MINUTE_MILLIS) {
+			return "a minute ago";
+		} else if (diff < 50 * MINUTE_MILLIS) {
+			return diff / MINUTE_MILLIS + " minutes ago";
+		} else if (diff < 90 * MINUTE_MILLIS) {
+			return "an hour ago";
+		} else if (diff < 24 * HOUR_MILLIS) {
+			return diff / HOUR_MILLIS + " hours ago";
+		} else if (diff < 48 * HOUR_MILLIS) {
+			return "yesterday";
+		} else {
+			return diff / DAY_MILLIS + " days ago";
+		}
+	}
+
+	public String getDaysAgo(String timee) {
+		long time = Long.parseLong(timee);
+		if (time < 1000000000000L) {
+			// if timestamp given in seconds, convert to millis
+			time *= 1000;
+		}
+
+		long now = System.currentTimeMillis();
+		if (time > now || time <= 0) {
+			return null;
+		}
+
+		// TODO: localize
+		final long diff = now - time;
+		if (diff < MINUTE_MILLIS) {
+			return null;
+		} else if (diff < 2 * MINUTE_MILLIS) {
+			return null;
+		} else if (diff < 50 * MINUTE_MILLIS) {
+			return null;
+		} else if (diff < 90 * MINUTE_MILLIS) {
+			return null;
+		} else if (diff < 24 * HOUR_MILLIS) {
+			return null;
+		} else if (diff < 48 * HOUR_MILLIS) {
+			return null;
+		} else {
+			return String.valueOf(diff / DAY_MILLIS);
+		}
 	}
 }

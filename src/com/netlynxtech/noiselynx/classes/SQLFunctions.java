@@ -119,13 +119,33 @@ public class SQLFunctions {
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {
 				while (cursor.isAfterLast() == false) {
-					HashMap<String, String> hash = new HashMap<String, String>();
-					hash.put(Consts.MESSAGES_MESSAGE_ID, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_ID)));
-					hash.put(Consts.MESSAGES_MESSAGE_TIMESTAMP, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_TIMESTAMP)));
-					hash.put(Consts.MESSAGES_MESSAGE_SUBJECT, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_SUBJECT)));
-					hash.put(Consts.MESSAGES_MESSAGE_BODY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_BODY)));
-					hash.put(Consts.MESSAGES_MESSAGE_PRIORITY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_PRIORITY)));
-					map.add(hash);
+					String messageTime = cursor.getString(cursor.getColumnIndex(Consts.DATABASE_COLUMN_UNIX));
+					String daysAgo = new Utils(ourContext).getDaysAgo(messageTime);
+					if (daysAgo != null) {
+						Log.e("DAYSAGO", "NOTNULL");
+						try {
+							int intDaysAgo = Integer.parseInt(daysAgo);
+							int houseKeep = Integer.parseInt(new Utils(ourContext).getHousekeep());
+							if (intDaysAgo <= houseKeep) {
+								Log.e("loadMessages", "ADDDING NEW");
+								HashMap<String, String> hash = new HashMap<String, String>();
+								hash.put(Consts.MESSAGES_MESSAGE_ID, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_ID)));
+								hash.put(Consts.MESSAGES_MESSAGE_TIMESTAMP, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_TIMESTAMP)));
+								hash.put(Consts.MESSAGES_MESSAGE_SUBJECT, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_SUBJECT)));
+								hash.put(Consts.MESSAGES_MESSAGE_BODY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_BODY)));
+								hash.put(Consts.MESSAGES_MESSAGE_PRIORITY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_PRIORITY)));
+								hash.put(Consts.DATABASE_COLUMN_UNIX, cursor.getString(cursor.getColumnIndex(Consts.DATABASE_COLUMN_UNIX)));
+								map.add(hash);
+							} else {
+								Log.e("loadMessages", "ENDING");
+								break;
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} else {
+						Log.e("DAYSAGO", "NULL");
+					}
 					cursor.moveToNext();
 				}
 			}
@@ -133,7 +153,7 @@ public class SQLFunctions {
 		cursor.close();
 		return map;
 	}
-	
+
 	public void insertMessage(String id, String timestamp, String subject, String body, String priority) {
 		ContentValues cv = new ContentValues();
 		String sql = "SELECT * FROM " + TABLE_MESSAGES + " WHERE " + Consts.MESSAGES_MESSAGE_ID + " = ?";
@@ -156,16 +176,9 @@ public class SQLFunctions {
 		cursor.close();
 	}
 
-	/*public String getMessageData(String id, String timestamp, String subject, String body, String priority) {
-		Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_MESSAGES + " WHERE " + Consts.MESSAGES_MESSAGE_ID + " = '" + id + "'", null);
-		if (cursor != null) {
-			if (cursor.moveToFirst()) {
-				String value = cursor.getString(cursor.getColumnIndex(MARKET_PRICE));
-				cursor.close();
-				return value;
-			}
-		}
-		cursor.close();
-		return Consts.MARKET_ITEM_NOT_FOUND;
-	}*/
+	/*
+	 * public String getMessageData(String id, String timestamp, String subject, String body, String priority) { Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_MESSAGES + " WHERE " +
+	 * Consts.MESSAGES_MESSAGE_ID + " = '" + id + "'", null); if (cursor != null) { if (cursor.moveToFirst()) { String value = cursor.getString(cursor.getColumnIndex(MARKET_PRICE)); cursor.close();
+	 * return value; } } cursor.close(); return Consts.MARKET_ITEM_NOT_FOUND; }
+	 */
 }

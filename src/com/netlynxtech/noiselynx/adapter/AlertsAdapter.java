@@ -74,7 +74,6 @@ public class AlertsAdapter extends BaseAdapter {
 			holder.rl_alert_items.setBackgroundResource(R.drawable.card_alert);
 		} else {
 			holder.rl_alert_items.setBackgroundResource(R.drawable.card);
-
 		}
 		return convertView;
 	}

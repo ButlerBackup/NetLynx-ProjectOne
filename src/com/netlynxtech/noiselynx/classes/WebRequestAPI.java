@@ -190,7 +190,6 @@ public class WebRequestAPI {
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-			list = sql.loadMessages();
 			sql.close();
 			return list;
 		}

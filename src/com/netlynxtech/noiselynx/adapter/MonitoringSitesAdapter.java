@@ -92,6 +92,8 @@ public class MonitoringSitesAdapter extends BaseAdapter {
 			holder.tvCurrentDBA.setTextColor(Color.parseColor("#FF0000"));
 			holder.tvAlert.setText(Consts.MONITORING_ALERT_YES);
 		} else {
+			holder.view1.setBackgroundColor(Color.parseColor("#FF00FF27"));
+			holder.tvCurrentDBA.setTextColor(Color.parseColor("#FF00FF27"));
 			holder.tvAlert.setText(Consts.MONITORING_ALERT_NO);
 		}
 
