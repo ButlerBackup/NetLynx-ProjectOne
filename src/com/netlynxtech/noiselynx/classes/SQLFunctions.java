@@ -20,7 +20,7 @@ public class SQLFunctions {
 	private static final String DATABASE_NAME = "noiselynx";
 	private static final String TABLE_MESSAGES = "messages";
 
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	private DbHelper ourHelper;
 	private final Context ourContext;
@@ -36,7 +36,7 @@ public class SQLFunctions {
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL("CREATE TABLE " + TABLE_MESSAGES + " (" + GLOBAL_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Consts.MESSAGES_MESSAGE_ID + " TEXT NOT NULL, "
 					+ Consts.MESSAGES_MESSAGE_TIMESTAMP + " TEXT NOT NULL, " + Consts.MESSAGES_MESSAGE_SUBJECT + " TEXT NOT NULL, " + Consts.MESSAGES_MESSAGE_BODY + " TEXT NOT NULL, "
-					+ Consts.MESSAGES_MESSAGE_PRIORITY + " TEXT NOT NULL);");
+					+ Consts.MESSAGES_MESSAGE_PRIORITY + " TEXT NOT NULL, " + Consts.DATABASE_COLUMN_UNIX + " TEXT NOT NULL);");
 		}
 
 		@Override
@@ -146,6 +146,7 @@ public class SQLFunctions {
 			cv.put(Consts.MESSAGES_MESSAGE_SUBJECT, subject);
 			cv.put(Consts.MESSAGES_MESSAGE_BODY, body);
 			cv.put(Consts.MESSAGES_MESSAGE_PRIORITY, priority);
+			cv.put(Consts.DATABASE_COLUMN_UNIX, new Utils(ourContext).convertTimetoUnix(timestamp));
 			try {
 				ourDatabase.insert(TABLE_MESSAGES, null, cv);
 			} catch (Exception e) {

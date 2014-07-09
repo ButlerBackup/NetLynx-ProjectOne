@@ -52,6 +52,7 @@ public class MonitoringSitesAdapter extends BaseAdapter {
 		TextView tvLEQ12hour;
 		TextView tvLocationLat;
 		TextView tvLocationLong;
+		TextView tvAlert;
 		View view1;
 	}
 
@@ -69,6 +70,7 @@ public class MonitoringSitesAdapter extends BaseAdapter {
 			holder.tvLEQ12hour = (TextView) convertView.findViewById(R.id.tvLEQ12hour);
 			holder.tvLocationLat = (TextView) convertView.findViewById(R.id.tvLocationLat);
 			holder.tvLocationLong = (TextView) convertView.findViewById(R.id.tvLocationLong);
+			holder.tvAlert = (TextView) convertView.findViewById(R.id.tvAlert);
 			holder.view1 = (View) convertView.findViewById(R.id.view1);
 			convertView.setTag(holder);
 		} else {
@@ -87,6 +89,10 @@ public class MonitoringSitesAdapter extends BaseAdapter {
 		// Log.e("ALERT FOR " + item.get(Consts.MONITORING_LOCATION), item.get(Consts.MONITORING_ALERT));
 		if (item.get(Consts.MONITORING_ALERT).equals(Consts.MONITORING_ALERT_YES)) {
 			holder.view1.setBackgroundColor(Color.parseColor("#FF0000"));
+			holder.tvCurrentDBA.setTextColor(Color.parseColor("#FF0000"));
+			holder.tvAlert.setText(Consts.MONITORING_ALERT_YES);
+		} else {
+			holder.tvAlert.setText(Consts.MONITORING_ALERT_NO);
 		}
 
 		holder.tvDevice.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +108,7 @@ public class MonitoringSitesAdapter extends BaseAdapter {
 				i.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, holder.tvLEQ12hour.getText().toString());
 				i.putExtra(Consts.MONITORING_LOCATION_LAT, holder.tvLocationLat.getText().toString());
 				i.putExtra(Consts.MONITORING_LOCATION_LONG, holder.tvLocationLong.getText().toString());
+				i.putExtra(Consts.MONITORING_ALERT, holder.tvAlert.getText().toString());
 				context.startActivity(i);
 			}
 		});

@@ -13,7 +13,6 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
-import android.location.Location;
 import android.util.Log;
 
 import com.netlynxtech.noiselynx.Consts;
@@ -133,6 +132,7 @@ public class WebRequestAPI {
 				map.put(Consts.MONITORING_LOCATION_LAT, object.getProperty(Consts.MONITORING_LOCATION_LAT).toString());
 				map.put(Consts.MONITORING_LOCATION_LONG, object.getProperty(Consts.MONITORING_LOCATION_LONG).toString());
 				map.put(Consts.MONITORING_ALERT, object.getProperty(Consts.MONITORING_ALERT).toString());
+				Log.e("ALERT", object.getProperty(Consts.MONITORING_ALERT).toString());
 				list.add(map);
 			}
 

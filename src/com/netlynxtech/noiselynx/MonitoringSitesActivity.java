@@ -47,6 +47,7 @@ public class MonitoringSitesActivity extends SherlockActivity {
 				TextView tvTwelveHour = (TextView) view.findViewById(R.id.tvLEQ12hour);
 				TextView tvLocationLat = (TextView) view.findViewById(R.id.tvLocationLat);
 				TextView tvLocationLong = (TextView) view.findViewById(R.id.tvLocationLong);
+				TextView tvAlert = (TextView) view.findViewById(R.id.tvAlert);
 				Intent i = new Intent(MonitoringSitesActivity.this, HistoryActivity.class);
 				i.putExtra(Consts.MONITORING_DEVICE_ID, tvID.getText().toString());
 				i.putExtra(Consts.MONITORING_DATE_TIME, tvTime.getText().toString());
@@ -56,6 +57,7 @@ public class MonitoringSitesActivity extends SherlockActivity {
 				i.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, tvTwelveHour.getText().toString());
 				i.putExtra(Consts.MONITORING_LOCATION_LAT, tvLocationLat.getText().toString());
 				i.putExtra(Consts.MONITORING_LOCATION_LONG, tvLocationLong.getText().toString());
+				i.putExtra(Consts.MONITORING_ALERT, tvAlert.getText().toString());
 				startActivity(i);
 			}
 		});

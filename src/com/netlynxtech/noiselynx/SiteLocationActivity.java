@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,6 +51,10 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 		longitude = Double.parseDouble(i.getStringExtra(Consts.MONITORING_LOCATION_LONG));
 		bUpdateLocation = (ActionProcessButton) findViewById(R.id.bUpdateLocation);
 		bUpdateLocation.setMode(ActionProcessButton.Mode.ENDLESS);
+		if (i.getStringExtra(Consts.MONITORING_ALERT).equals(Consts.MONITORING_ALERT_YES)) {
+			((View) findViewById(R.id.view1)).setBackgroundColor(Color.parseColor("#FF0000"));
+			((TextView) findViewById(R.id.tvCurrentDBA)).setTextColor(Color.parseColor("#FF0000"));
+		}
 		final ProgressGenerator progressGenerator = new ProgressGenerator(new OnCompleteListener() {
 
 			@Override

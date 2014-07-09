@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,10 @@ public class HistoryActivity extends SherlockActivity {
 		((TextView) findViewById(R.id.tvCurrentDBA)).setText(i.getStringExtra(Consts.MONITORING_LEQ_FIVE_MINUTES));
 		((TextView) findViewById(R.id.tvLEQ1hour)).setText(i.getStringExtra(Consts.MONITORING_LEQ_ONE_HOUR));
 		((TextView) findViewById(R.id.tvLEQ12hour)).setText(i.getStringExtra(Consts.MONITORING_LEQ_TWELVE_HOUR));
+		if (i.getStringExtra(Consts.MONITORING_ALERT).equals(Consts.MONITORING_ALERT_YES)) {
+			((View) findViewById(R.id.view1)).setBackgroundColor(Color.parseColor("#FF0000"));
+			((TextView) findViewById(R.id.tvCurrentDBA)).setTextColor(Color.parseColor("#FF0000"));
+		}
 		lvHistory = (ListView) findViewById(R.id.lvHistory);
 		supportInvalidateOptionsMenu();
 		getHistory();
@@ -63,6 +69,7 @@ public class HistoryActivity extends SherlockActivity {
 			in.putExtra(Consts.MONITORING_LEQ_TWELVE_HOUR, i.getStringExtra(Consts.MONITORING_LEQ_TWELVE_HOUR).toString());
 			in.putExtra(Consts.MONITORING_LOCATION_LAT, i.getStringExtra(Consts.MONITORING_LOCATION_LAT).toString());
 			in.putExtra(Consts.MONITORING_LOCATION_LONG, i.getStringExtra(Consts.MONITORING_LOCATION_LONG).toString());
+			in.putExtra(Consts.MONITORING_ALERT, i.getStringExtra(Consts.MONITORING_ALERT).toString());
 			startActivity(in);
 			break;
 		default:

@@ -52,6 +52,15 @@
             android:visibility="gone"
             font:customFont="roboto.ttf" />
 
+        <View
+            android:id="@+id/view1"
+            android:layout_width="10dip"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_alignRight="@+id/separator"
+            android:layout_alignTop="@+id/tvDevice"
+            android:background="#FF00FF27" />
+
         <com.netlynxtech.noiselynx.classes.TextViewPlus
             android:id="@+id/tvLocationLat"
             android:layout_width="wrap_content"
@@ -91,6 +100,7 @@
             android:layout_height="1dip"
             android:layout_alignBottom="@+id/tvDevice"
             android:layout_alignLeft="@+id/tvTime"
+            android:layout_alignRight="@+id/tvDevice"
             android:background="#33b5e5"
             android:padding="8dp" />
 
@@ -141,18 +151,6 @@
             font:customFont="roboto.ttf" />
 
         <com.netlynxtech.noiselynx.classes.TextViewPlus
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/separator"
-            android:layout_below="@+id/tvCurrentDBA"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/dba"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            font:customFont="roboto.ttf" />
-
-        <com.netlynxtech.noiselynx.classes.TextViewPlus
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -194,6 +192,27 @@
             android:text="@string/leq_one_hour"
             android:textAppearance="?android:attr/textAppearanceMedium"
             font:customFont="roboto.ttf" />
+
+        <com.netlynxtech.noiselynx.classes.TextViewPlus
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCurrentDBA"
+            android:layout_toLeftOf="@+id/view1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/dba"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            font:customFont="roboto.ttf" />
+
+        <TextView
+            android:id="@+id/tvAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </RelativeLayout>

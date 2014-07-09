@@ -47,4 +47,6 @@ public class Consts {
 
 	final static public String THRESHOLD_TIMESPAN = "TimeSpan";
 	final static public String THRESHOLD_THRESHOLD = "Threhold"; // GRAMMAR ERROR CAREFUL
+	final static public String DATABASE_COLUMN_UNIX = "unixTimestamp";
+
 }

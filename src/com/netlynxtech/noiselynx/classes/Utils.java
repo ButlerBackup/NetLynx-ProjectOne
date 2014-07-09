@@ -3,6 +3,7 @@ package com.netlynxtech.noiselynx.classes;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
@@ -100,7 +101,7 @@ public class Utils {
 	public String parseDatetime(String datetime) {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 		// Log.e("DATE DATE", sp.getString("pref_timing", "1"));
-		final String pattern = "yyyy-MM-dd'T'hh:mm:ss";
+		final String pattern = "yyyy-MM-dd'T'HH:mm:ss";
 		final SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
 		try {
 			SimpleDateFormat outFormatter;
@@ -126,7 +127,7 @@ public class Utils {
 		}
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 		// Log.e("DATE DATE", sp.getString("pref_timing", "1"));
-		final String pattern = "hh:mm";
+		final String pattern = "HH:mm";
 		final SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
 		try {
 			SimpleDateFormat outFormatter;
@@ -142,6 +143,23 @@ public class Utils {
 		}
 	}
 
+	public String convertTimetoUnix(String datetime) {
+		// Log.e("TIME", datetime);
+		final String pattern = "yyyy-MM-dd'T'HH:mm:ss";
+		final SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.ENGLISH);
+		try {
+			sdf.setTimeZone(TimeZone.getTimeZone(TimeZone.getDefault().getID())); // unble to get GMT + 8
+			Date d = sdf.parse(datetime);
+			long unix = d.getTime() / 1000;
+			Log.e("TIME TO UNIX", String.valueOf(unix));
+			return String.valueOf(unix);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return datetime;
+		}
+
+	}
+
 	public void showNotifications(String shortTitle, String title, String message) {
 		SecurePreferences sp = new SecurePreferences(context);
 		long[] vibration;
@@ -154,9 +172,8 @@ public class Utils {
 		Intent myIntent = new Intent(context, AlertsActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Notification myNotification = new NotificationCompat.Builder(context).setContentTitle("Exercise of Notification!").setContentText("http://android-er.blogspot.com/").setTicker("Notification!")
-				.setWhen(System.currentTimeMillis()).setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher)
-				.setVibrate(vibration).build();
+		Notification myNotification = new NotificationCompat.Builder(context).setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis())
+				.setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).setVibrate(vibration).build();
 
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(999, myNotification);
