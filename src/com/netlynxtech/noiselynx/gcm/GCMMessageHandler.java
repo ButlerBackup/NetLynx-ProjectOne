@@ -46,7 +46,8 @@ public class GCMMessageHandler extends IntentService {
 			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
 				// sendNotification("Received: " + extras.toString());
 				// sendNotification(extras.getString("test"));
-				parseData(extras.getString("test"));
+				//parseData(extras.getString("test"));
+				sendNotification("Example notification");
 			}
 		}
 		// Release the wake lock provided by the WakefulBroadcastReceiver.

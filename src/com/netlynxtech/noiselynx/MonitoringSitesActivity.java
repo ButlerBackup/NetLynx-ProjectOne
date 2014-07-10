@@ -74,7 +74,8 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			break;
 		case R.id.menu_monitoring_alert:
 			startActivity(new Intent(MonitoringSitesActivity.this, AlertsActivity.class));
-
+			break;
+		case R.id.menu_search:
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
