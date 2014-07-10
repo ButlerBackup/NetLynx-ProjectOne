@@ -3,6 +3,7 @@ package com.netlynxtech.noiselynx;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -14,7 +15,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -85,6 +85,35 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				pref_housekeep.setSummary(SettingsActivity.this.getResources().getString(R.string.pref_housekeep_summary).toString().replace(" X ", " " + newValue + " "));
+				return true;
+			}
+		});
+
+		Preference pref_reset = (Preference) findPreference("pref_reset");
+		pref_reset.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+				builder.setMessage(SettingsActivity.this.getResources().getString(R.string.pref_reset_summary)).setPositiveButton("Yes", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+						sp.edit().clear().commit();
+						Intent i = SettingsActivity.this.getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+						i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(i);
+						finish();
+					}
+				}).setNegativeButton("No", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+				}).show();
+
 				return true;
 			}
 		});

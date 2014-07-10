@@ -76,10 +76,16 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								Location loc = googleMap.getMyLocation();
-								if (loc != null) {
-									Log.e("Location", loc.getLatitude() + "|" + loc.getLongitude());
-									progressGenerator.updateLocation(bUpdateLocation, loc, deviceID, SiteLocationActivity.this);
+								try {
+									Location loc = googleMap.getMyLocation();
+									if (loc != null) {
+										Log.e("Location", loc.getLatitude() + "|" + loc.getLongitude());
+										progressGenerator.updateLocation(bUpdateLocation, loc, deviceID, SiteLocationActivity.this);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+									Toast.makeText(SiteLocationActivity.this, "Unable to get your location. Make sure Google Map above is loaded and your network is stable.", Toast.LENGTH_LONG)
+											.show();
 								}
 							}
 						}).setNegativeButton("No", new OnClickListener() {

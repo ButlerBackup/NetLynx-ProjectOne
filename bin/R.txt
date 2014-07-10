@@ -629,11 +629,13 @@ int string menu_monitoring_alert_text 0x7f0a0044
 int string menu_refreh_text 0x7f0a0030
 int string phone_number_hint 0x7f0a0034
 int string pin_hint 0x7f0a0035
-int string pref_about_dialog_text 0x7f0a0049
+int string pref_about_dialog_text 0x7f0a004b
 int string pref_about_summary 0x7f0a0048
 int string pref_about_title 0x7f0a0047
 int string pref_housekeep_summary 0x7f0a0042
 int string pref_housekeep_title 0x7f0a0041
+int string pref_reset_summary 0x7f0a004a
+int string pref_reset_title 0x7f0a0049
 int string pref_timing_summary 0x7f0a0046
 int string pref_timing_title 0x7f0a0045
 int string pref_vibration 0x7f0a003e

@@ -108,7 +108,7 @@ public class AlertsActivity extends SherlockActivity {
 					new WebRequestAPI(AlertsActivity.this).getAlerts("123456");
 					SQLFunctions sql = new SQLFunctions(AlertsActivity.this);
 					sql.open();
-					data = sql.loadMessages(); // get new messages, which insert the nwe get from DB
+					data = sql.loadMessagesNoHousekeep(); // get new messages, which insert the nwe get from DB
 					sql.close();
 				} catch (Exception e) {
 					e.printStackTrace();

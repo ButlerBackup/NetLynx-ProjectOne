@@ -28,6 +28,7 @@ import android.util.Log;
 import com.netlynxtech.noiselynx.AlertsActivity;
 import com.netlynxtech.noiselynx.Consts;
 import com.netlynxtech.noiselynx.R;
+import com.netlynxtech.noiselynx.SettingsActivity;
 import com.securepreferences.SecurePreferences;
 
 public class Utils {
@@ -35,6 +36,14 @@ public class Utils {
 
 	public Utils(Context context) {
 		this.context = context;
+	}
+
+	public boolean checkIfLoggedIn() {
+		SecurePreferences sp = new SecurePreferences(context);
+		if (!sp.getString(Consts.PREFERENCES_PHONE_NO, "0").equals("0") && !sp.getString(Consts.PREFERENCES_GCMID, "0").equals("0") && !sp.getString(Consts.PREFERENCES_UDID, "0").equals("0")) {
+			return true;
+		}
+		return false;
 	}
 
 	public void setGCMID(String id) {

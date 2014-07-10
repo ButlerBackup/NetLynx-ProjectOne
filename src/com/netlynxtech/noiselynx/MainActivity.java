@@ -13,6 +13,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.netlynxtech.noiselynx.classes.ProgressGenerator;
 import com.netlynxtech.noiselynx.classes.ProgressGenerator.OnCompleteListener;
+import com.netlynxtech.noiselynx.classes.Utils;
 import com.securepreferences.SecurePreferences;
 
 public class MainActivity extends SherlockActivity {
@@ -25,6 +26,10 @@ public class MainActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		getSupportActionBar().setTitle("NoiseLynx Registration");
 		super.onCreate(savedInstanceState);
+		if (new Utils(MainActivity.this).checkIfLoggedIn()) {
+			startActivity(new Intent(MainActivity.this, MonitoringSitesActivity.class));
+			finish();
+		}
 		setContentView(R.layout.main);
 		tvError = (TextView) findViewById(R.id.tvError);
 		etPhoneNo = (EditText) findViewById(R.id.etPhoneNo);
@@ -65,7 +70,7 @@ public class MainActivity extends SherlockActivity {
 					tvError.setVisibility(View.VISIBLE);
 				} else {
 					SecurePreferences sp = new SecurePreferences(MainActivity.this);
-					sp.edit().putString("phone", etPhoneNo.getText().toString()).commit();
+					sp.edit().putString(Consts.PREFERENCES_PHONE_NO, etPhoneNo.getText().toString()).commit();
 					startActivity(new Intent(MainActivity.this, CheckPinActivity.class));
 					finish();
 				}
