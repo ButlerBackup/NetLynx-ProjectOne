@@ -133,7 +133,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 				// Set an EditText view to get user input
 				final EditText input = new EditText(SettingsActivity.this);
-				input.setText(new Utils(SettingsActivity.this).getPassword());
+				String prevPass = new Utils(SettingsActivity.this).getPassword();
+				input.setText(prevPass.equals("0") ? "" : prevPass);
 				alert.setView(input);
 
 				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

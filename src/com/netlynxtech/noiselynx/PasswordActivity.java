@@ -34,6 +34,7 @@ public class PasswordActivity extends SherlockActivity {
 				finish();
 			} else { // user set a password
 				bSkip.setVisibility(View.GONE);
+				tvPasswordInfo.setText(PasswordActivity.this.getResources().getString(R.string.password_info_text_existing));
 			}
 		}
 
@@ -60,7 +61,7 @@ public class PasswordActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				new Utils(PasswordActivity.this).setPassword("");
-				startActivity(new Intent(PasswordActivity.this, MonitoringSitesActivity.class));
+				startActivity(new Intent(PasswordActivity.this, CheckPinActivity.class));
 				finish();
 			}
 		});

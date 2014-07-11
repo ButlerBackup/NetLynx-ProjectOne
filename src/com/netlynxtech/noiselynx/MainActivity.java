@@ -27,7 +27,7 @@ public class MainActivity extends SherlockActivity {
 		getSupportActionBar().setTitle("NoiseLynx Registration");
 		super.onCreate(savedInstanceState);
 		if (new Utils(MainActivity.this).checkIfLoggedIn()) {
-			startActivity(new Intent(MainActivity.this, MonitoringSitesActivity.class));
+			startActivity(new Intent(MainActivity.this, PasswordActivity.class));
 			finish();
 		}
 		setContentView(R.layout.main);

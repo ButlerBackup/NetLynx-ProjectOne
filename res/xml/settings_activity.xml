@@ -41,8 +41,8 @@
 
         <Preference
             android:key="pref_password"
-            android:summary=""
-            android:title="" />
+            android:summary="@string/pref_password_summary"
+            android:title="@string/pref_password_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Misc" >
         <Preference
