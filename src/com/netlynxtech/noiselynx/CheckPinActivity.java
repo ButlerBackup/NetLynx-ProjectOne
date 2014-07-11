@@ -28,7 +28,7 @@ public class CheckPinActivity extends SherlockActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		getSupportActionBar().setTitle("NoiseLynx PIN Check");
+		getSupportActionBar().setTitle(CheckPinActivity.this.getResources().getString(R.string.check_pin_name));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.check_pin_activity);
 		tvError = (TextView) findViewById(R.id.tvError);

@@ -71,7 +71,7 @@ public class MainActivity extends SherlockActivity {
 				} else {
 					SecurePreferences sp = new SecurePreferences(MainActivity.this);
 					sp.edit().putString(Consts.PREFERENCES_PHONE_NO, etPhoneNo.getText().toString()).commit();
-					startActivity(new Intent(MainActivity.this, CheckPinActivity.class));
+					startActivity(new Intent(MainActivity.this, PasswordActivity.class));
 					finish();
 				}
 			}

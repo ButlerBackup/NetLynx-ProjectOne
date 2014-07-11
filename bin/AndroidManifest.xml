@@ -59,6 +59,8 @@
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.AlertsActivity" >
         </activity>
+        <activity android:name="com.netlynxtech.noiselynx.PasswordActivity" >
+        </activity>
 
         <receiver
             android:name="com.netlynxtech.noiselynx.gcm.GCMBroadcastReceiver"

@@ -24,7 +24,7 @@ public class Consts {
 	final static public String PREFERENCES_PHONE_NO = "phone";
 	final static public String PREFERENCES_UDID = "udid";
 	final static public String PREFERENCES_GCMID = "gcmid";
-
+	final static public String PREFERENCES_PASSWORD = "password";
 	final static public String MONITORING_DEVICE_ID = "DeviceID";
 	final static public String MONITORING_DATE_TIME = "DataDateTime";
 	final static public String MONITORING_LOCATION = "Location";

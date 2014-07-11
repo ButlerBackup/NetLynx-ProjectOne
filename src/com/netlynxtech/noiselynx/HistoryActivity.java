@@ -34,7 +34,7 @@ public class HistoryActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setTitle("12 Hour History");
+		getSupportActionBar().setTitle(HistoryActivity.this.getResources().getString(R.string.history_name));
 		setContentView(R.layout.history_activity_layout);
 		i = getIntent();
 		deviceID = i.getStringExtra(Consts.MONITORING_DEVICE_ID);

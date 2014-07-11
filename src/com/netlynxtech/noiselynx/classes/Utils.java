@@ -28,7 +28,6 @@ import android.util.Log;
 import com.netlynxtech.noiselynx.AlertsActivity;
 import com.netlynxtech.noiselynx.Consts;
 import com.netlynxtech.noiselynx.R;
-import com.netlynxtech.noiselynx.SettingsActivity;
 import com.securepreferences.SecurePreferences;
 
 public class Utils {
@@ -46,6 +45,16 @@ public class Utils {
 		return false;
 	}
 
+	public String getPassword() {
+		SecurePreferences sp = new SecurePreferences(context);
+		return sp.getString(Consts.PREFERENCES_PASSWORD, "0");
+	}
+
+	public void setPassword(String pw) {
+		SecurePreferences sp = new SecurePreferences(context);
+		sp.edit().putString(Consts.PREFERENCES_PASSWORD, pw).commit();
+	}
+	
 	public void setGCMID(String id) {
 		SecurePreferences sp = new SecurePreferences(context);
 		sp.edit().putString(Consts.PREFERENCES_GCMID, id).commit();

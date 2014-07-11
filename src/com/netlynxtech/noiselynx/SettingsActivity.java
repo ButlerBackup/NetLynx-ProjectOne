@@ -1,5 +1,7 @@
 package com.netlynxtech.noiselynx;
 
+import java.util.Set;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -14,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
@@ -117,6 +120,39 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 				return true;
 			}
 		});
+
+		Preference pref_password = (Preference) findPreference("pref_password");
+		pref_password.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+
+				alert.setTitle(SettingsActivity.this.getResources().getString(R.string.password_dialog_title));
+				alert.setMessage(SettingsActivity.this.getResources().getString(R.string.password_dialog_message));
+
+				// Set an EditText view to get user input
+				final EditText input = new EditText(SettingsActivity.this);
+				input.setText(new Utils(SettingsActivity.this).getPassword());
+				alert.setView(input);
+
+				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						String value = input.getText().toString();
+						new Utils(SettingsActivity.this).setPassword(value);
+					}
+				});
+
+				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+					}
+				});
+
+				alert.show();
+				return true;
+			}
+		});
+
 	}
 
 	@Override

@@ -38,6 +38,11 @@
             android:key="pref_timing"
             android:summary="@string/pref_timing_summary"
             android:title="@string/pref_timing_title" />
+
+        <Preference
+            android:key="pref_password"
+            android:summary=""
+            android:title="" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Misc" >
         <Preference
