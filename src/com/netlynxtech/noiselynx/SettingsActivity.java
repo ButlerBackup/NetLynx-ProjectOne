@@ -1,7 +1,5 @@
 package com.netlynxtech.noiselynx;
 
-import java.util.Set;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -22,6 +20,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.netlynxtech.noiselynx.classes.Utils;
+import com.securepreferences.SecurePreferences;
 
 public class SettingsActivity extends SherlockPreferenceActivity {
 
@@ -104,6 +103,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 					public void onClick(DialogInterface dialog, int which) {
 						SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
 						sp.edit().clear().commit();
+						SecurePreferences scp = new SecurePreferences(SettingsActivity.this);
+						scp.edit().clear().commit();
 						Intent i = SettingsActivity.this.getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
 						i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(i);

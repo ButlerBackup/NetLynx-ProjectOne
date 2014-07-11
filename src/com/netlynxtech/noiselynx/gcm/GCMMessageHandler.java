@@ -39,15 +39,19 @@ public class GCMMessageHandler extends IntentService {
 			 * you don't recognize.
 			 */
 			if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-				sendNotification("Send error: " + extras.toString());
+				//sendNotification("Send error: " + extras.toString());
 			} else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
-				sendNotification("Deleted messages on server: " + extras.toString());
+				//sendNotification("Deleted messages on server: " + extras.toString());
 				// If it's a regular GCM message, do some work.
 			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
 				// sendNotification("Received: " + extras.toString());
 				// sendNotification(extras.getString("test"));
 				//parseData(extras.getString("test"));
-				sendNotification("Example notification");
+				Log.e("GCM", extras.toString());
+				//longtitle
+				//shorttitle
+				//body
+				sendNotification(extras);
 			}
 		}
 		// Release the wake lock provided by the WakefulBroadcastReceiver.
@@ -75,7 +79,7 @@ public class GCMMessageHandler extends IntentService {
 		}
 	}
 
-	private void sendNotification(String msg) {
-		new Utils(this).showNotifications("New Message", "Title", msg);
+	private void sendNotification(Bundle msg) {
+		new Utils(this).showNotifications(msg.getString("shorttitle"), msg.getString("longtitle"), msg.getString("body"));
 	}
 }

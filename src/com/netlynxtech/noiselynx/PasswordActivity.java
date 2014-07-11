@@ -44,7 +44,7 @@ public class PasswordActivity extends SherlockActivity {
 			public void onClick(View v) {
 				if (password.equals("0")) { // new user
 					new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString());
-					startActivity(new Intent(PasswordActivity.this, MonitoringSitesActivity.class));
+					startActivity(new Intent(PasswordActivity.this, CheckPinActivity.class));
 					finish();
 				} else {
 					if (etPassword.getText().toString().equals(password)) {
