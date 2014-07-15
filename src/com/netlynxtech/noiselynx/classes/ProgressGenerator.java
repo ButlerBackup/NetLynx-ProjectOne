@@ -106,8 +106,8 @@ public class ProgressGenerator {
 			String phoneNo = sp.getString(Consts.PREFERENCES_PHONE_NO, "0");
 			String unique_id = new Utils(context).getDeviceId();
 			sp.edit().putString(Consts.PREFERENCES_UDID, unique_id).commit();
-			// res = new WebRequestAPI(context).checkPin(phoneNo, params[0], params[1], "123456");
-			res = new WebRequestAPI(context).checkPin(phoneNo, params[0], "123456", "123456");
+			res = new WebRequestAPI(context).checkPin(phoneNo, params[0], params[1], new Utils(context).getUDID());
+			//res = new WebRequestAPI(context).checkPin(phoneNo, params[0], "123456", "123456");
 			return null;
 		}
 

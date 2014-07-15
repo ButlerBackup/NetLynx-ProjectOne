@@ -12,7 +12,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.netlynxtech.noiselynx.classes.Utils;
 
 public class PasswordActivity extends SherlockActivity {
-	String password;
+	String password, message;
 	Button bSkip, bLogin;
 	EditText etPassword;
 	TextView tvPasswordInfo;
@@ -21,6 +21,8 @@ public class PasswordActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		Intent i = getIntent();
+		message = i.getStringExtra("message");
 		setContentView(R.layout.password_activity);
 		bSkip = (Button) findViewById(R.id.bSkip);
 		bLogin = (Button) findViewById(R.id.bLogin);
@@ -29,10 +31,10 @@ public class PasswordActivity extends SherlockActivity {
 
 		password = new Utils(PasswordActivity.this).getPassword();
 		if (!password.equals("0")) { // already set password
-			if (password.equals("")) {
+			if (password.equals("")) { // dont want password
 				startActivity(new Intent(PasswordActivity.this, MonitoringSitesActivity.class));
 				finish();
-			} else { // user set a password
+			} else { // user set a password, mow prompt them!
 				bSkip.setVisibility(View.GONE);
 				tvPasswordInfo.setText(PasswordActivity.this.getResources().getString(R.string.password_info_text_existing));
 			}
@@ -44,7 +46,7 @@ public class PasswordActivity extends SherlockActivity {
 			public void onClick(View v) {
 				if (password.equals("0")) { // new user
 					new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString());
-					startActivity(new Intent(PasswordActivity.this, CheckPinActivity.class));
+					startActivity(new Intent(PasswordActivity.this, WelcomeActivity.class));
 					finish();
 				} else {
 					if (etPassword.getText().toString().equals(password)) {
@@ -61,7 +63,7 @@ public class PasswordActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				new Utils(PasswordActivity.this).setPassword("");
-				startActivity(new Intent(PasswordActivity.this, CheckPinActivity.class));
+				startActivity(new Intent(PasswordActivity.this, WelcomeActivity.class).putExtra("message", message));
 				finish();
 			}
 		});

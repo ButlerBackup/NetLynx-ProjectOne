@@ -70,7 +70,7 @@ public class CheckPinActivity extends SherlockActivity {
 					bCheckPin.setProgress(0);
 					tvError.setVisibility(View.VISIBLE);
 				} else {
-					startActivity(new Intent(CheckPinActivity.this, WelcomeActivity.class).putExtra("message", tvStatusDesc.getText().toString()));
+					startActivity(new Intent(CheckPinActivity.this, PasswordActivity.class).putExtra("message", tvStatusDesc.getText().toString()));
 					finish();
 				}
 			}
