@@ -639,6 +639,7 @@ int string menu_refreh_text 0x7f0a0032
 int string menu_search_text 0x7f0a0047
 int string password_dialog_message 0x7f0a0054
 int string password_dialog_title 0x7f0a0053
+int string password_info_password_null 0x7f0a0058
 int string password_info_text_existing 0x7f0a0056
 int string password_info_text_initial 0x7f0a0055
 int string password_info_text_wrong 0x7f0a0057

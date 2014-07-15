@@ -45,9 +45,13 @@ public class PasswordActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				if (password.equals("0")) { // new user
-					new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString());
-					startActivity(new Intent(PasswordActivity.this, WelcomeActivity.class));
-					finish();
+					if (etPassword.getText().toString().length() > 0) {
+						new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString());
+						startActivity(new Intent(PasswordActivity.this, WelcomeActivity.class).putExtra("message", message));
+						finish();
+					} else {
+						tvPasswordInfo.setText(PasswordActivity.this.getResources().getString(R.string.password_info_password_null));
+					}
 				} else {
 					if (etPassword.getText().toString().equals(password)) {
 						startActivity(new Intent(PasswordActivity.this, MonitoringSitesActivity.class));

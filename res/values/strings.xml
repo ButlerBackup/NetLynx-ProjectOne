@@ -44,5 +44,6 @@
     <string name="password_info_text_initial">This password is used to prevent unauthorized login.\nSet a password now or you can do so in the future\n(Menu > Settings)</string>
     <string name="password_info_text_existing">Please login.</string>
     <string name="password_info_text_wrong">Wrong Password!</string>
+    <string name="password_info_password_null">Enter a password or click "Skip Now"</string>
 
 </resources>
