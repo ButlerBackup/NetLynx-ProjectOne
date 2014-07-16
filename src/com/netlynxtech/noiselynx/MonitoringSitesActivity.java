@@ -23,6 +23,7 @@ import com.manuelpeinado.refreshactionitem.ProgressIndicatorType;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 import com.netlynxtech.noiselynx.adapter.MonitoringSitesAdapter;
+import com.netlynxtech.noiselynx.classes.Utils;
 import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 
 public class MonitoringSitesActivity extends SherlockActivity {
@@ -166,8 +167,7 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			@Override
 			protected Void doInBackground(Void... params) {
 				try {
-					// ArrayList<HashMap<String, String>> data = new WebRequestAPI(MonitoringSitesActivity.this).getDevices(new Utils(MonitoringSitesActivity.this).getUDID());
-					data = api.getDevices("123456");
+					data = api.getDevices(new Utils(MonitoringSitesActivity.this).getUDID());
 					adapter = new MonitoringSitesAdapter(MonitoringSitesActivity.this, data);
 				} catch (Exception e) {
 					e.printStackTrace();

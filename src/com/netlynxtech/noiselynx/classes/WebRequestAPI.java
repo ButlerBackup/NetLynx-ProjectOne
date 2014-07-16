@@ -71,6 +71,7 @@ public class WebRequestAPI {
 		rpc.addProperty("pin", pin);
 		rpc.addProperty("GCM_ID", gcm_id);
 		rpc.addProperty("UDID", udid);
+		Log.e("TEST", mobileNumber + "|" + pin + "|" + gcm_id + "|" + udid);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.dotNet = true;
 		envelope.setOutputSoapObject(rpc);
