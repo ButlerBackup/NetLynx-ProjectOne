@@ -6,24 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.dd.processbutton.iml.ActionProcessButton
+    <Button
         android:id="@+id/bUpdateLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:padding="10dp"
-        android:text="@string/site_location_show_text"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        custom:pb_colorComplete="@color/green_complete"
-        custom:pb_colorError="@color/red_error"
-        custom:pb_colorNormal="@color/blue_normal"
-        custom:pb_colorPressed="@color/blue_pressed"
-        custom:pb_colorProgress="@color/purple_progress"
-        custom:pb_textComplete="Success"
-        custom:pb_textError="Error"
-        custom:pb_textProgress="Loading" />
+        android:text="@string/site_location_get_location"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <fragment
         android:id="@+id/map"
@@ -193,18 +185,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             font:customFont="roboto.ttf" />
 
-        <com.netlynxtech.noiselynx.classes.TextViewPlus
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvCurrentDBA"
-            android:layout_toLeftOf="@+id/view1"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/dba"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            font:customFont="roboto.ttf" />
-
         <TextView
             android:id="@+id/tvAlert"
             android:layout_width="wrap_content"
@@ -213,6 +193,18 @@
             android:layout_alignParentTop="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:visibility="gone" />
+
+        <com.netlynxtech.noiselynx.classes.TextViewPlus
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTime"
+            android:layout_toLeftOf="@+id/view1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/dba"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            font:customFont="roboto.ttf" />
     </RelativeLayout>
 
 </RelativeLayout>

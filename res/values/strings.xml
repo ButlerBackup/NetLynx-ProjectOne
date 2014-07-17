@@ -26,6 +26,8 @@
     <string name="pref_housekeep_title">Housekeep Alert Message</string>
     <string name="pref_housekeep_summary">Trim away old alert messages of more than X days</string>
     <string name="site_location_show_text">Update device to Current Location</string>
+    <string name="site_location_get_location">Get Current Location</string>
+    <string name="site_location_loading">Getting Location..</string>
     <string name="menu_monitoring_alert_text">Show Alerts</string>
     <string name="menu_search_text">Search</string>
     <string name="pref_timing_title">24 hour / AM PM</string>

@@ -15,6 +15,7 @@ import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 import com.netlynxtech.noiselynx.adapter.AlertsAdapter;
 import com.netlynxtech.noiselynx.classes.SQLFunctions;
+import com.netlynxtech.noiselynx.classes.Utils;
 import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 
 public class AlertsActivity extends SherlockActivity {
@@ -105,7 +106,7 @@ public class AlertsActivity extends SherlockActivity {
 			@Override
 			protected Void doInBackground(Void... params) {
 				try {
-					new WebRequestAPI(AlertsActivity.this).getAlerts("123456");
+					new WebRequestAPI(AlertsActivity.this).getAlerts(new Utils(AlertsActivity.this).getUDID());
 					SQLFunctions sql = new SQLFunctions(AlertsActivity.this);
 					sql.open();
 					data = sql.loadMessagesNoHousekeep(); // get new messages, which insert the nwe get from DB

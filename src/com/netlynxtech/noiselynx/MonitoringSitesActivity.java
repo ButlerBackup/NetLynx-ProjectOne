@@ -68,6 +68,12 @@ public class MonitoringSitesActivity extends SherlockActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		getDevices();
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_settings:

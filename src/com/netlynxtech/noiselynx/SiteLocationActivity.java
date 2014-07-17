@@ -6,16 +6,17 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -23,9 +24,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.netlynxtech.noiselynx.classes.ProgressGenerator;
 import com.netlynxtech.noiselynx.classes.ProgressGenerator.OnCompleteListener;
+import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 
 public class SiteLocationActivity extends SherlockFragmentActivity {
-	ActionProcessButton bUpdateLocation;
+	Button bUpdateLocation;
 	private SupportMapFragment mapFragment;
 	private GoogleMap googleMap;
 	double latitude, longitude;
@@ -49,8 +51,7 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 		((TextView) findViewById(R.id.tvLEQ12hour)).setText(i.getStringExtra(Consts.MONITORING_LEQ_TWELVE_HOUR));
 		latitude = Double.parseDouble(i.getStringExtra(Consts.MONITORING_LOCATION_LAT));
 		longitude = Double.parseDouble(i.getStringExtra(Consts.MONITORING_LOCATION_LONG));
-		bUpdateLocation = (ActionProcessButton) findViewById(R.id.bUpdateLocation);
-		bUpdateLocation.setMode(ActionProcessButton.Mode.ENDLESS);
+		bUpdateLocation = (Button) findViewById(R.id.bUpdateLocation);
 		if (i.getStringExtra(Consts.MONITORING_ALERT).equals(Consts.MONITORING_ALERT_YES)) {
 			((View) findViewById(R.id.view1)).setBackgroundColor(Color.parseColor("#FF0000"));
 			((TextView) findViewById(R.id.tvCurrentDBA)).setTextColor(Color.parseColor("#FF0000"));
@@ -69,32 +70,51 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 		bUpdateLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				bUpdateLocation.setEnabled(false);
-				AlertDialog.Builder builder = new AlertDialog.Builder(SiteLocationActivity.this);
-				builder.setMessage("Are you sure you're on the right location? You can do so by turning on your GPS and clicking the compass icon on the top right corner of the map.")
-						.setPositiveButton("Yes", new OnClickListener() {
+				String buttonText = bUpdateLocation.getText().toString();
+				if (buttonText.equals(SiteLocationActivity.this.getResources().getString(R.string.site_location_get_location))) { // get current location
+					bUpdateLocation.setEnabled(false);
+					bUpdateLocation.setText(SiteLocationActivity.this.getResources().getString(R.string.site_location_loading));
+					Location myLocation = googleMap.getMyLocation();
+					if (myLocation != null) {
+						LatLng sydney = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+						googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
+						googleMap.addMarker(new MarkerOptions().title(locationName).position(sydney));
+						bUpdateLocation.setText(SiteLocationActivity.this.getResources().getString(R.string.site_location_show_text));
+					} else {
+						Toast.makeText(SiteLocationActivity.this, "Unable to get your current location. Do make sure your GPS is turned on and/or click the compass on the top right of the maps",
+								Toast.LENGTH_SHORT).show();
+						bUpdateLocation.setEnabled(true);
+						bUpdateLocation.setText(SiteLocationActivity.this.getResources().getString(R.string.site_location_get_location));
+					}
+					bUpdateLocation.setEnabled(true);
+				} else if (buttonText.equals(SiteLocationActivity.this.getResources().getString(R.string.site_location_show_text))) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(SiteLocationActivity.this);
+					builder.setMessage("Are you sure you're on the right location? You can do so by turning on your GPS and clicking the compass icon on the top right corner of the map.")
+							.setPositiveButton("Yes", new OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								try {
-									Location loc = googleMap.getMyLocation();
-									if (loc != null) {
-										Log.e("Location", loc.getLatitude() + "|" + loc.getLongitude());
-										progressGenerator.updateLocation(bUpdateLocation, loc, deviceID, SiteLocationActivity.this);
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									try {
+										Location loc = googleMap.getMyLocation();
+										if (loc != null) {
+											Log.e("Location", loc.getLatitude() + "|" + loc.getLongitude());
+											// progressGenerator.updateLocation(bUpdateLocation, loc, deviceID, SiteLocationActivity.this);
+											new updateLocation().execute(String.valueOf(loc.getLatitude()), String.valueOf(loc.getLongitude()), deviceID);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+										Toast.makeText(SiteLocationActivity.this, "Unable to get your location. Make sure Google Map above is loaded and your network is stable.", Toast.LENGTH_LONG)
+												.show();
 									}
-								} catch (Exception e) {
-									e.printStackTrace();
-									Toast.makeText(SiteLocationActivity.this, "Unable to get your location. Make sure Google Map above is loaded and your network is stable.", Toast.LENGTH_LONG)
-											.show();
 								}
-							}
-						}).setNegativeButton("No", new OnClickListener() {
+							}).setNegativeButton("No", new OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								bUpdateLocation.setEnabled(true);
-							}
-						}).show();
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									bUpdateLocation.setEnabled(true);
+								}
+							}).show();
+				}
 			}
 		});
 		try {
@@ -141,6 +161,37 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// getSupportMenuInflater().inflate(R.menu.alerts_menu, menu);
 		return true;
+	}
+
+	class updateLocation extends AsyncTask<String, Void, Void> {
+		boolean error = false;
+		String data = "";
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			SiteLocationActivity.this.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					if (data.contains("success|")) {
+						bUpdateLocation.setText("Success!");
+						bUpdateLocation.setBackgroundColor(Color.parseColor("#009C12"));
+						bUpdateLocation.setTextColor(Color.parseColor("#FFFFFF"));
+					} else {
+						bUpdateLocation.setEnabled(true);
+						Toast.makeText(SiteLocationActivity.this, "Unable to update location. Please contact admin", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+		}
+
+		@Override
+		protected Void doInBackground(String... params) {
+			WebRequestAPI w = new WebRequestAPI(SiteLocationActivity.this);
+			data = w.updateLocation(params[2], params[0], params[1]);
+			return null;
+		}
+
 	}
 
 }
