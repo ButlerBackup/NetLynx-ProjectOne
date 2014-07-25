@@ -24,7 +24,8 @@
     <string name="pref_vibration_on">On</string>
     <string name="pref_vibration_off">Off</string>
     <string name="pref_housekeep_title">Housekeep Alert Message</string>
-    <string name="pref_housekeep_summary">Trim away old alert messages of more than X days</string>
+    <string name="pref_housekeep_summary">Show only X alerts</string>
+    <string name="pref_housekeep_dialog_title">How many alerts to show</string>
     <string name="site_location_show_text">Update device to Current Location</string>
     <string name="site_location_get_location">Get Current Location</string>
     <string name="site_location_loading">Getting Location..</string>

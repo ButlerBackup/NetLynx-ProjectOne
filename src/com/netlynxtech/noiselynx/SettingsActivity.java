@@ -12,6 +12,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceManager;
 import android.text.Html;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -86,7 +87,36 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				pref_housekeep.setSummary(SettingsActivity.this.getResources().getString(R.string.pref_housekeep_summary).toString().replace(" X ", " " + newValue + " "));
+				if (newValue.equals("60")) {
+					AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+					alert.setTitle("Housekeep Amount");
+					alert.setMessage("Input how many alerts you would like to show");
+					
+					final EditText input = new EditText(SettingsActivity.this);
+					input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_NUMBER);
+					input.setText(new Utils(SettingsActivity.this).getHousekeep());
+
+					alert.setView(input);
+
+					alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+							String value = input.getText().toString().replaceAll("[^\\d]", "");
+							pref_housekeep.setSummary(SettingsActivity.this.getResources().getString(R.string.pref_housekeep_summary).toString().replace(" X ", " " + value + " "));
+							SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+							preferences.edit().putString("pref_housekeep", value).commit();
+						}
+					});
+
+					alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+							// Canceled.
+						}
+					});
+
+					alert.show();
+				} else {
+					pref_housekeep.setSummary(SettingsActivity.this.getResources().getString(R.string.pref_housekeep_summary).toString().replace(" X ", " " + newValue + " "));
+				}
 				return true;
 			}
 		});

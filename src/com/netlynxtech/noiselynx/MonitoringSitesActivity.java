@@ -6,10 +6,7 @@ import java.util.HashMap;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -88,16 +85,6 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			return super.onOptionsItemSelected(item);
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void showToast() {
-		LayoutInflater inflater = getLayoutInflater();
-		View layout = inflater.inflate(R.layout.progress_loading, (ViewGroup) findViewById(R.id.toast_layout_root));
-		Toast toast = new Toast(getApplicationContext());
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setView(layout);
-		toast.show();
 	}
 
 	@Override

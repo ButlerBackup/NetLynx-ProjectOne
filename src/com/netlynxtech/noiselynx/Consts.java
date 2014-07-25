@@ -3,8 +3,10 @@ package com.netlynxtech.noiselynx;
 public class Consts {
 
 	final static public int WEBREQUEST_TIMEOUT = 20000;
+	final static public String PROJECT_NUMBER = "534726101262";
 	// http://192.168.10.8/wsNoiseLynx/noiselynx.asmx'
-	final static public String NOISELYNX_API_URL = "http://192.168.10.8/wsNoiseLynx/noiselynx.asmx";
+	//final static public String NOISELYNX_API_URL = "http://192.168.10.8/wsNoiseLynx/noiselynx.asmx";
+	final static public String NOISELYNX_API_URL = "http://210.193.23.250/wsNoiseLynx/noiselynx.asmx";
 	final static public String NOISELYNX_API_REQUESTPIN_SOAP_ACTION = "http://NetlynxTech.com/RequestPIN";
 	final static public String NOISELYNX_API_REQUESTPIN_METHOD_NAME = "RequestPIN";
 	final static public String NOISELYNX_API_CHECKPIN_SOAP_ACTION = "http://NetlynxTech.com/CheckPIN";

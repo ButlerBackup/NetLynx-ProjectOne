@@ -21,7 +21,7 @@ import com.netlynxtech.noiselynx.classes.Utils;
 public class CheckPinActivity extends SherlockActivity {
 	GoogleCloudMessaging gcm;
 	String GCM_register_ID = "";
-	String PROJECT_NUMBER = "104627290699";
+
 	EditText etPinNo;
 	ActionProcessButton bCheckPin;
 	TextView tvError, tvGCMID, tvStatusDesc;
@@ -133,7 +133,7 @@ public class CheckPinActivity extends SherlockActivity {
 					if (gcm == null) {
 						gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 					}
-					GCM_register_ID = gcm.register(PROJECT_NUMBER);
+					GCM_register_ID = gcm.register(Consts.PROJECT_NUMBER);
 					Log.e("RegisteredID", GCM_register_ID);
 					new Utils(CheckPinActivity.this).setGCMID(GCM_register_ID);
 				} catch (Exception e) {

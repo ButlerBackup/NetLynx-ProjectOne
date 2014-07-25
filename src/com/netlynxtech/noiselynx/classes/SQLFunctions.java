@@ -113,15 +113,13 @@ public class SQLFunctions {
 		return map;
 	}
 
-	public ArrayList<HashMap<String, String>> loadMessagesNoHousekeep() {
+	public ArrayList<HashMap<String, String>> loadMessages() {
 		ArrayList<HashMap<String, String>> map = new ArrayList<HashMap<String, String>>();
-		Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_MESSAGES + " ORDER BY " + GLOBAL_ROWID + " DESC", null);
+		Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_MESSAGES + " ORDER BY " + GLOBAL_ROWID + " DESC LIMIT " + new Utils(ourContext).getHousekeep(), null);
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {
 				while (cursor.isAfterLast() == false) {
-					Log.e("DAYSAGO", "NOTNULL");
 					try {
-						Log.e("loadMessages", "ADDDING NEW");
 						HashMap<String, String> hash = new HashMap<String, String>();
 						hash.put(Consts.MESSAGES_MESSAGE_ID, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_ID)));
 						hash.put(Consts.MESSAGES_MESSAGE_TIMESTAMP, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_TIMESTAMP)));
@@ -132,47 +130,6 @@ public class SQLFunctions {
 						map.add(hash);
 					} catch (Exception e) {
 						e.printStackTrace();
-					}
-					cursor.moveToNext();
-				}
-			}
-		}
-		cursor.close();
-		return map;
-	}
-
-	public ArrayList<HashMap<String, String>> loadMessages() {
-		ArrayList<HashMap<String, String>> map = new ArrayList<HashMap<String, String>>();
-		Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_MESSAGES + " ORDER BY " + GLOBAL_ROWID + " DESC", null);
-		if (cursor != null) {
-			if (cursor.moveToFirst()) {
-				while (cursor.isAfterLast() == false) {
-					String messageTime = cursor.getString(cursor.getColumnIndex(Consts.DATABASE_COLUMN_UNIX));
-					String daysAgo = new Utils(ourContext).getDaysAgo(messageTime);
-					if (daysAgo != null) {
-						Log.e("DAYSAGO", "NOTNULL");
-						try {
-							int intDaysAgo = Integer.parseInt(daysAgo);
-							int houseKeep = Integer.parseInt(new Utils(ourContext).getHousekeep());
-							if (intDaysAgo <= houseKeep) {
-								Log.e("loadMessages", "ADDDING NEW");
-								HashMap<String, String> hash = new HashMap<String, String>();
-								hash.put(Consts.MESSAGES_MESSAGE_ID, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_ID)));
-								hash.put(Consts.MESSAGES_MESSAGE_TIMESTAMP, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_TIMESTAMP)));
-								hash.put(Consts.MESSAGES_MESSAGE_SUBJECT, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_SUBJECT)));
-								hash.put(Consts.MESSAGES_MESSAGE_BODY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_BODY)));
-								hash.put(Consts.MESSAGES_MESSAGE_PRIORITY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_PRIORITY)));
-								hash.put(Consts.DATABASE_COLUMN_UNIX, cursor.getString(cursor.getColumnIndex(Consts.DATABASE_COLUMN_UNIX)));
-								map.add(hash);
-							} else {
-								Log.e("loadMessages", "ENDING");
-								break;
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} else {
-						Log.e("DAYSAGO", "NULL");
 					}
 					cursor.moveToNext();
 				}

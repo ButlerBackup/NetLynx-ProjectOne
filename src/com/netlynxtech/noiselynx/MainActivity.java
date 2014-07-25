@@ -61,7 +61,6 @@ public class MainActivity extends SherlockActivity {
 
 			@Override
 			public void onComplete() {
-				// Log.e("Button Text", bRequestPin.getText().toString());
 				if (!bRequestPin.getText().toString().equals("Success")) {
 					tvError.setText(bRequestPin.getText().toString());
 					etPhoneNo.setEnabled(true);

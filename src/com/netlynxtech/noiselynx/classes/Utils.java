@@ -54,7 +54,7 @@ public class Utils {
 		SecurePreferences sp = new SecurePreferences(context);
 		sp.edit().putString(Consts.PREFERENCES_PASSWORD, pw).commit();
 	}
-	
+
 	public void setGCMID(String id) {
 		SecurePreferences sp = new SecurePreferences(context);
 		sp.edit().putString(Consts.PREFERENCES_GCMID, id).commit();
@@ -81,7 +81,7 @@ public class Utils {
 
 	public String getHousekeep() {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-		return sp.getString("pref_housekeep", "5");
+		return sp.getString("pref_housekeep", "20");
 	}
 
 	private MediaPlayer mMediaPlayer;
@@ -237,34 +237,23 @@ public class Utils {
 		}
 	}
 
-	public String getDaysAgo(String timee) {
+	public double getDaysAgo(String timee) {
 		long time = Long.parseLong(timee);
 		if (time < 1000000000000L) {
 			// if timestamp given in seconds, convert to millis
-			time *= 1000;
+			// time *= 1000;
 		}
-
-		long now = System.currentTimeMillis();
+		//Log.e("TIME GIVEN", String.valueOf(time));
+		long now = System.currentTimeMillis() / 1000L;
+		//Log.e("NOW", String.valueOf(now));
 		if (time > now || time <= 0) {
-			return null;
+			return 0;
 		}
 
 		// TODO: localize
 		final long diff = now - time;
-		if (diff < MINUTE_MILLIS) {
-			return null;
-		} else if (diff < 2 * MINUTE_MILLIS) {
-			return null;
-		} else if (diff < 50 * MINUTE_MILLIS) {
-			return null;
-		} else if (diff < 90 * MINUTE_MILLIS) {
-			return null;
-		} else if (diff < 24 * HOUR_MILLIS) {
-			return null;
-		} else if (diff < 48 * HOUR_MILLIS) {
-			return null;
-		} else {
-			return String.valueOf(diff / DAY_MILLIS);
-		}
+		Log.e("Difference mili", String.valueOf(diff));
+		Log.e("Difference", String.valueOf(diff / 24 / 60 / 60));
+		return diff / 24 / 60 / 60;
 	}
 }

@@ -22,8 +22,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.netlynxtech.noiselynx.classes.ProgressGenerator;
-import com.netlynxtech.noiselynx.classes.ProgressGenerator.OnCompleteListener;
 import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 
 public class SiteLocationActivity extends SherlockFragmentActivity {
@@ -56,16 +54,6 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 			((View) findViewById(R.id.view1)).setBackgroundColor(Color.parseColor("#FF0000"));
 			((TextView) findViewById(R.id.tvCurrentDBA)).setTextColor(Color.parseColor("#FF0000"));
 		}
-		final ProgressGenerator progressGenerator = new ProgressGenerator(new OnCompleteListener() {
-
-			@Override
-			public void onComplete() {
-				if (!bUpdateLocation.getText().toString().equals("Success")) {
-					Toast.makeText(SiteLocationActivity.this, bUpdateLocation.getText().toString(), Toast.LENGTH_SHORT).show();
-					bUpdateLocation.setText(SiteLocationActivity.this.getResources().getString(R.string.site_location_show_text));
-				}
-			}
-		});
 
 		bUpdateLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -166,11 +154,12 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 	class updateLocation extends AsyncTask<String, Void, Void> {
 		boolean error = false;
 		String data = "";
+
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			SiteLocationActivity.this.runOnUiThread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					if (data.contains("success|")) {

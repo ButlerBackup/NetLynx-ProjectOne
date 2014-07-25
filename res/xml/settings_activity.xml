@@ -18,8 +18,8 @@
             android:title="@string/pref_vibration" />
 
         <ListPreference
-            android:defaultValue="5"
-            android:dialogTitle="How many days to show"
+            android:defaultValue="20"
+            android:dialogTitle="@string/pref_housekeep_dialog_title"
             android:entries="@array/pref_housekeep_shown"
             android:entryValues="@array/pref_housekeep_values"
             android:key="pref_housekeep"
@@ -38,8 +38,7 @@
             android:key="pref_timing"
             android:summary="@string/pref_timing_summary"
             android:title="@string/pref_timing_title" />
-
-        <Preference
+        <Preference
             android:key="pref_password"
             android:summary="@string/pref_password_summary"
             android:title="@string/pref_password_title" />
