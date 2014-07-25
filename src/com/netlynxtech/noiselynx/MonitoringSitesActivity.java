@@ -32,6 +32,9 @@ public class MonitoringSitesActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.monitoring_sites_activity);
+		if (!new Utils(MonitoringSitesActivity.this).checkIfLoggedIn()) {
+			finish();
+		}
 		lvMonitoringSite = (ListView) findViewById(R.id.lvMonitoringSite);
 		lvMonitoringSite.setOnItemClickListener(new OnItemClickListener() {
 
@@ -78,8 +81,6 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			break;
 		case R.id.menu_monitoring_alert:
 			startActivity(new Intent(MonitoringSitesActivity.this, AlertsActivity.class));
-			break;
-		case R.id.menu_search:
 			break;
 		default:
 			return super.onOptionsItemSelected(item);

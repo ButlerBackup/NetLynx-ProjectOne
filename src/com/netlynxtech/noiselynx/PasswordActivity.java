@@ -34,10 +34,12 @@ public class PasswordActivity extends SherlockActivity {
 			if (password.equals("")) { // dont want password
 				startActivity(new Intent(PasswordActivity.this, MonitoringSitesActivity.class));
 				finish();
-			} else { // user set a password, mow prompt them!
+			} else { // user set a password, now prompt them!
 				bSkip.setVisibility(View.GONE);
 				tvPasswordInfo.setText(PasswordActivity.this.getResources().getString(R.string.password_info_text_existing));
 			}
+		} else {
+			bLogin.setText(PasswordActivity.this.getResources().getString(R.string.password_activity_set_password));
 		}
 
 		bLogin.setOnClickListener(new OnClickListener() {
@@ -46,7 +48,7 @@ public class PasswordActivity extends SherlockActivity {
 			public void onClick(View v) {
 				if (password.equals("0")) { // new user
 					if (etPassword.getText().toString().length() > 0) {
-						new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString());
+						new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString().trim());
 						startActivity(new Intent(PasswordActivity.this, WelcomeActivity.class).putExtra("message", message));
 						finish();
 					} else {

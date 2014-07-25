@@ -195,8 +195,10 @@ public class Utils {
 		Intent myIntent = new Intent(context, AlertsActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
+		//Notification myNotification = new NotificationCompat.Builder(context).setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis())
+			//	.setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).setVibrate(vibration).build();
 		Notification myNotification = new NotificationCompat.Builder(context).setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis())
-				.setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).setVibrate(vibration).build();
+				.setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).build();
 
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(999, myNotification);

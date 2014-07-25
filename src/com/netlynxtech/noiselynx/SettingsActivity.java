@@ -32,7 +32,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		addPreferencesFromResource(R.xml.settings_activity);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
-		final Preference pref_notification = (Preference) findPreference("pref_notification");
+		/*final Preference pref_notification = (Preference) findPreference("pref_notification");
 		pref_notification.setSummary(new Utils(SettingsActivity.this).getRingtoneName(prefs.getString("pref_notification", "")));
 		pref_notification.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -52,29 +52,14 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 				new Utils(SettingsActivity.this).showNotifications("Noise level above threshold!", "Place2 : 80 dBA", "some other message");
 				return true;
 			}
-		});
+		});*/
 
 		Preference pref_about = (Preference) findPreference("pref_about");
 		pref_about.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				// Toast.makeText(SettingsActivity.this, "LOL", Toast.LENGTH_SHORT).show();
-				LayoutInflater inflater = LayoutInflater.from(SettingsActivity.this);
-				View layout = inflater.inflate(R.layout.settings_about, null);
-				TextView tvAbout = (TextView) layout.findViewById(R.id.tvAbout);
-				tvAbout.setText(Html.fromHtml(SettingsActivity.this.getResources().getString(R.string.pref_about_dialog_text)));
-				AlertDialog.Builder ad = new AlertDialog.Builder(SettingsActivity.this);
-				ad.setIcon(R.drawable.ic_launcher);
-				ad.setTitle("About Us");
-				ad.setView(layout);
-
-				ad.setPositiveButton("OK", new OnClickListener() {
-					public void onClick(DialogInterface dialog, int arg1) {
-
-					}
-				});
-				ad.show();
+				startActivity(new Intent(SettingsActivity.this, AboutUsActivity.class));
 				return true;
 			}
 		});
@@ -82,7 +67,6 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		final ListPreference pref_housekeep = (ListPreference) findPreference("pref_housekeep");
 		pref_housekeep.setSummary(SettingsActivity.this.getResources().getString(R.string.pref_housekeep_summary).toString()
 				.replace(" X ", " " + new Utils(SettingsActivity.this).getHousekeep() + " "));
-
 		pref_housekeep.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -91,7 +75,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 					AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
 					alert.setTitle("Housekeep Amount");
 					alert.setMessage("Input how many alerts you would like to show");
-					
+
 					final EditText input = new EditText(SettingsActivity.this);
 					input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_NUMBER);
 					input.setText(new Utils(SettingsActivity.this).getHousekeep());
@@ -101,18 +85,14 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 					alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
 							String value = input.getText().toString().replaceAll("[^\\d]", "");
+							if (value.length() < 0) {
+								value = "20";
+							}
 							pref_housekeep.setSummary(SettingsActivity.this.getResources().getString(R.string.pref_housekeep_summary).toString().replace(" X ", " " + value + " "));
 							SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
 							preferences.edit().putString("pref_housekeep", value).commit();
 						}
 					});
-
-					alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int whichButton) {
-							// Canceled.
-						}
-					});
-
 					alert.show();
 				} else {
 					pref_housekeep.setSummary(SettingsActivity.this.getResources().getString(R.string.pref_housekeep_summary).toString().replace(" X ", " " + newValue + " "));
@@ -170,7 +150,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						String value = input.getText().toString();
+						String value = input.getText().toString().trim();
 						new Utils(SettingsActivity.this).setPassword(value);
 					}
 				});

@@ -8,6 +8,6 @@
         android:actionViewClass="com.manuelpeinado.refreshactionitem.RefreshActionItem"
         android:icon="@drawable/ic_action_refresh"
         android:showAsAction="always"
-        android:title="@string/menu_refreh_text"/>
+        android:title="@string/menu_refresh_text"/>
 
 </menu>

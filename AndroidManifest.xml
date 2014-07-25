@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.netlynxtech.noiselynx"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0.0" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -47,6 +47,8 @@
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.CheckPinActivity" >
         </activity>
+        <activity android:name="com.netlynxtech.noiselynx.AboutUsActivity" >
+        </activity>
         <activity android:name="com.netlynxtech.noiselynx.SettingsActivity" >
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.WelcomeActivity" >
@@ -79,7 +81,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCq_Wc1_Fuw7Mtv1ogywGU3uQoJbW4fAqQ" />
+            android:value="AIzaSyB4PqGtj6N2qvZAUMW2wInBA9HjmXoK6NU" />
     </application>
 
 </manifest>

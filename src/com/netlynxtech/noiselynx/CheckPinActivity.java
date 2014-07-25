@@ -70,6 +70,7 @@ public class CheckPinActivity extends SherlockActivity {
 					bCheckPin.setProgress(0);
 					tvError.setVisibility(View.VISIBLE);
 				} else {
+					new Utils(CheckPinActivity.this).setGCMID(GCM_register_ID);
 					startActivity(new Intent(CheckPinActivity.this, PasswordActivity.class).putExtra("message", tvStatusDesc.getText().toString()));
 					finish();
 				}
@@ -80,7 +81,6 @@ public class CheckPinActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				Log.e("Device ID", new Utils(CheckPinActivity.this).getDeviceId());
-				Log.e("Button", "Click");
 				if (GCM_register_ID.length() < 1) {
 					Log.e("Button", "No GCM ID. Cannot continue");
 					tvError.setVisibility(View.VISIBLE);
@@ -135,7 +135,6 @@ public class CheckPinActivity extends SherlockActivity {
 					}
 					GCM_register_ID = gcm.register(Consts.PROJECT_NUMBER);
 					Log.e("RegisteredID", GCM_register_ID);
-					new Utils(CheckPinActivity.this).setGCMID(GCM_register_ID);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
