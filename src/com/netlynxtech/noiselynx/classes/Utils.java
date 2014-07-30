@@ -38,7 +38,7 @@ public class Utils {
 	}
 
 	public boolean checkIfLoggedIn() {
-		SecurePreferences sp = new SecurePreferences(context);
+		SecurePreferences sp = new SecurePreferences(context); // hash shared preferences
 		if (!sp.getString(Consts.PREFERENCES_PHONE_NO, "0").equals("0") && !sp.getString(Consts.PREFERENCES_GCMID, "0").equals("0") && !sp.getString(Consts.PREFERENCES_UDID, "0").equals("0")) {
 			return true;
 		}

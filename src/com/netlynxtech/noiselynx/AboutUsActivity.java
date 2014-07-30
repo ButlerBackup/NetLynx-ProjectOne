@@ -17,10 +17,10 @@ public class AboutUsActivity extends SherlockActivity {
 		setContentView(R.layout.about_us_activity);
 		String v = "1";
 		try {
-			v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+			v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName; // get version of this package (in manifest)
 			((TextView) findViewById(R.id.tvVersion)).setText(AboutUsActivity.this.getResources().getString(R.string.version) + " " + v);
 		} catch (Exception e) {
-			((TextView) findViewById(R.id.tvVersion)).setText(AboutUsActivity.this.getResources().getString(R.string.version) + " 1.0.0");
+			((TextView) findViewById(R.id.tvVersion)).setText(AboutUsActivity.this.getResources().getString(R.string.version) + " 1.0.0"); //else v1.0.0
 		}
 	}
 
