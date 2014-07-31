@@ -41,18 +41,17 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 				pref_notification.setSummary(new Utils(SettingsActivity.this).getRingtoneName(newValue.toString()));
 				return true;
 			}
-		});
+		});*/
 
 		Preference pref_test = (Preference) findPreference("pref_test");
 		pref_test.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				new Utils(SettingsActivity.this).playNotificationSound();
-				new Utils(SettingsActivity.this).showNotifications("Noise level above threshold!", "Place2 : 80 dBA", "some other message");
+				new Utils(SettingsActivity.this).showNotifications("Noise level above threshold!", "Place2 : 80 dBA", "some other message", "tone3");
 				return true;
 			}
-		});*/
+		});
 
 		Preference pref_about = (Preference) findPreference("pref_about");
 		pref_about.setOnPreferenceClickListener(new OnPreferenceClickListener() {

@@ -2,7 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceCategory android:title="Settings" >
-       <!--  <RingtonePreference
+
+        <!--
+        <RingtonePreference
             android:defaultValue="content://settings/system/notification_sound"
             android:key="pref_notification"
             android:ringtoneType="notification"
@@ -15,7 +17,8 @@
             android:key="pref_vibration"
             android:summaryOff="@string/pref_vibration_off"
             android:summaryOn="@string/pref_vibration_on"
-            android:title="@string/pref_vibration" /> -->
+            android:title="@string/pref_vibration" />
+        -->
 
         <ListPreference
             android:defaultValue="20"
@@ -26,9 +29,9 @@
             android:summary="@string/pref_housekeep_summary"
             android:title="@string/pref_housekeep_title" />
 
-       <!--  <Preference
+        <Preference
             android:key="pref_test"
-            android:title="Test vibration and sound" /> -->
+            android:title="Test vibration and sound" />
 
         <ListPreference
             android:defaultValue="1"
@@ -38,7 +41,8 @@
             android:key="pref_timing"
             android:summary="@string/pref_timing_summary"
             android:title="@string/pref_timing_title" />
-        <Preference
+
+        <Preference
             android:key="pref_password"
             android:summary="@string/pref_password_summary"
             android:title="@string/pref_password_title" />

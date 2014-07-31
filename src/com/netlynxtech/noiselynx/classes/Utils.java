@@ -9,7 +9,6 @@ import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -65,10 +64,10 @@ public class Utils {
 		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 		final String deviceId = tm.getDeviceId();
 		if (deviceId != null) {
-			sp.edit().putString(Consts.PREFERENCES_UDID, deviceId).commit();
+			sp.edit().putString(Consts.PREFERENCES_UDID, deviceId).commit(); // get IMEI if available
 			return deviceId;
 		} else {
-			sp.edit().putString(Consts.PREFERENCES_UDID, android.os.Build.SERIAL).commit();
+			sp.edit().putString(Consts.PREFERENCES_UDID, android.os.Build.SERIAL).commit(); // else hardware serial number
 			return android.os.Build.SERIAL;
 		}
 	}
@@ -129,9 +128,9 @@ public class Utils {
 		try {
 			SimpleDateFormat outFormatter;
 			if (sp.getString("pref_timing", "1").equals("1")) {
-				outFormatter = new SimpleDateFormat("d MMMM yyyy HH:mm", Locale.getDefault());
+				outFormatter = new SimpleDateFormat("d MMMM yyyy HH:mm", Locale.getDefault()); // 24 hour
 			} else {
-				outFormatter = new SimpleDateFormat("d MMMM yyyy KK:mma", Locale.getDefault());
+				outFormatter = new SimpleDateFormat("d MMMM yyyy KK:mma", Locale.getDefault()); // 12 hour
 			}
 			Date d = sdf.parse(datetime);
 			return outFormatter.format(d).toString();
@@ -166,6 +165,7 @@ public class Utils {
 		}
 	}
 
+	// Converting given time stamp to unix timestamp
 	public String convertTimetoUnix(String datetime) {
 		// Log.e("TIME", datetime);
 		final String pattern = "yyyy-MM-dd'T'HH:mm:ss";
@@ -183,7 +183,15 @@ public class Utils {
 
 	}
 
-	public void showNotifications(String shortTitle, String title, String message) {
+	public void showNotifications(String shortTitle, String title, String message, String tone) {
+		int toneToPlay;
+		if (tone.equals("tone1")) {
+			toneToPlay = R.raw.tone1;
+		} else if (tone.equals("tone2")) {
+			toneToPlay = R.raw.tone2;
+		} else {
+			toneToPlay = R.raw.tone3;
+		}
 		SecurePreferences sp = new SecurePreferences(context);
 		long[] vibration;
 		if (sp.getBoolean("pref_vibration", false)) {
@@ -195,13 +203,14 @@ public class Utils {
 		Intent myIntent = new Intent(context, AlertsActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		//Notification myNotification = new NotificationCompat.Builder(context).setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis())
-			//	.setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).setVibrate(vibration).build();
-		Notification myNotification = new NotificationCompat.Builder(context).setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis())
-				.setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).build();
+		// Notification myNotification = new NotificationCompat.Builder(context).setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis())
+		// .setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).setVibrate(vibration).build();
+		NotificationCompat.Builder myNotification = new NotificationCompat.Builder(context);
+		myNotification.setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis()).setContentIntent(pendingIntent).setAutoCancel(true)
+				.setSmallIcon(R.drawable.ic_launcher).setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + toneToPlay));
 
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(999, myNotification);
+		notificationManager.notify(999, myNotification.build());
 	}
 
 	private static final int SECOND_MILLIS = 1000;
@@ -245,9 +254,9 @@ public class Utils {
 			// if timestamp given in seconds, convert to millis
 			// time *= 1000;
 		}
-		//Log.e("TIME GIVEN", String.valueOf(time));
+		// Log.e("TIME GIVEN", String.valueOf(time));
 		long now = System.currentTimeMillis() / 1000L;
-		//Log.e("NOW", String.valueOf(now));
+		// Log.e("NOW", String.valueOf(now));
 		if (time > now || time <= 0) {
 			return 0;
 		}
