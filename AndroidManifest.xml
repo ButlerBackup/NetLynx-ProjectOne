@@ -40,17 +40,17 @@
         <activity
             android:name="com.netlynxtech.noiselynx.MainActivity"
             android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.CheckPinActivity" >
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.AboutUsActivity" >
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.SettingsActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.WelcomeActivity" >
         </activity>
