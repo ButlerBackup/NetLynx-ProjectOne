@@ -663,6 +663,8 @@ int string pin_hint 0x7f0b0038
 int string pref_about_dialog_text 0x7f0b0052
 int string pref_about_summary 0x7f0b004f
 int string pref_about_title 0x7f0b004e
+int string pref_force_sound_summary 0x7f0b0063
+int string pref_force_sound_title 0x7f0b0062
 int string pref_housekeep_dialog_title 0x7f0b0046
 int string pref_housekeep_summary 0x7f0b0045
 int string pref_housekeep_title 0x7f0b0044

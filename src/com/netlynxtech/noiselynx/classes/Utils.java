@@ -85,10 +85,8 @@ public class Utils {
 
 	private MediaPlayer mMediaPlayer;
 
-	public void playNotificationSound() {
-		SharedPreferences getAlarms = PreferenceManager.getDefaultSharedPreferences(context);
-		String alarms = getAlarms.getString("pref_notification", "default ringtone");
-		Uri uri = Uri.parse(alarms);
+	public void playNotificationSound(int toneToPlay) {
+		Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + toneToPlay);
 		playSound(context, uri);
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -203,14 +201,24 @@ public class Utils {
 		Intent myIntent = new Intent(context, AlertsActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		// Notification myNotification = new NotificationCompat.Builder(context).setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis())
-		// .setContentIntent(pendingIntent).setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).setVibrate(vibration).build();
 		NotificationCompat.Builder myNotification = new NotificationCompat.Builder(context);
 		myNotification.setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis()).setContentIntent(pendingIntent).setAutoCancel(true)
 				.setSmallIcon(R.drawable.ic_launcher).setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + toneToPlay));
 
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(999, myNotification.build());
+
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		if (settings.getBoolean("pref_force_sound", false)) {
+			AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
+			switch (am.getRingerMode()) {
+			case AudioManager.RINGER_MODE_SILENT:
+			case AudioManager.RINGER_MODE_VIBRATE:
+				playNotificationSound(toneToPlay);
+				break;
+			}
+		}
 	}
 
 	private static final int SECOND_MILLIS = 1000;

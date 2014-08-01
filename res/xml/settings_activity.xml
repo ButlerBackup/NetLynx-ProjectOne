@@ -17,7 +17,7 @@
             android:key="pref_vibration"
             android:summaryOff="@string/pref_vibration_off"
             android:summaryOn="@string/pref_vibration_on"
-            android:title="@string/pref_vibration" />
+            android:title="@string/pref_vibration" />
         -->
 
         <ListPreference
@@ -28,6 +28,12 @@
             android:key="pref_housekeep"
             android:summary="@string/pref_housekeep_summary"
             android:title="@string/pref_housekeep_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_force_sound"
+            android:summary="@string/pref_force_sound_summary"
+            android:title="@string/pref_force_sound_title" />
 
         <Preference
             android:key="pref_test"
