@@ -39,14 +39,14 @@
         android:visibility="gone" />
 
     <EditText
-        android:id="@+id/etPinNo"
+        android:id="@+id/etPinNoAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bCheckPin"
         android:layout_alignLeft="@+id/bCheckPin"
         android:layout_alignRight="@+id/bCheckPin"
         android:ems="10"
-        android:hint="@string/pin_hint"
+        android:hint="@string/pin_hint_again"
         android:inputType="phone"
         android:paddingBottom="10dp"
         android:textSize="20sp" />
@@ -61,15 +61,28 @@
         android:text="@string/gcm_id_retrieved_waiting"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <EditText
+        android:id="@+id/etPinNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etPinNoAgain"
+        android:layout_alignLeft="@+id/etPinNoAgain"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="@string/pin_hint"
+        android:inputType="phone"
+        android:paddingBottom="10dp"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tvStatusDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/etPinNo"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="53dp"
+        android:layout_alignLeft="@+id/tvError"
+        android:layout_alignRight="@+id/tvError"
+        android:layout_below="@+id/tvError"
         android:text="Small Text"
-        android:visibility="gone"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone" />
 
 </RelativeLayout>

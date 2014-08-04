@@ -48,7 +48,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				new Utils(SettingsActivity.this).showNotifications("Noise level above threshold!", "Place2 : 80 dBA", "some other message", "tone3");
+				new Utils(SettingsActivity.this).showNotifications("Noise level above threshold!", "Place2 : 80 dBA", "some other message");
 				return true;
 			}
 		});

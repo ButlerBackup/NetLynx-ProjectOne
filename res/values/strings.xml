@@ -13,6 +13,7 @@
     <string name="check_pin">Check Pin</string>
     <string name="phone_number_hint">Phone Number</string>
     <string name="pin_hint">Enter PIN number</string>
+    <string name="pin_hint_again">Enter PIN number again</string>
     <string name="gcm_id_retrieved_retrying">Retrying GCM ID broadcast..</string>
     <string name="gcm_id_retrieved_waiting">Waiting for GCM ID broadcast..</string>
     <string name="gcm_id_retrieved_successful">Successfully retrieved GCM ID</string>

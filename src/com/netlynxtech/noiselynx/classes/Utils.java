@@ -85,8 +85,10 @@ public class Utils {
 
 	private MediaPlayer mMediaPlayer;
 
-	public void playNotificationSound(int toneToPlay) {
-		Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + toneToPlay);
+	public void playNotificationSound() {
+		SharedPreferences getAlarms = PreferenceManager.getDefaultSharedPreferences(context);
+		String alarms = getAlarms.getString("pref_notification", "default ringtone");
+		Uri uri = Uri.parse(alarms);
 		playSound(context, uri);
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -181,15 +183,7 @@ public class Utils {
 
 	}
 
-	public void showNotifications(String shortTitle, String title, String message, String tone) {
-		int toneToPlay;
-		if (tone.equals("tone1")) {
-			toneToPlay = R.raw.tone1;
-		} else if (tone.equals("tone2")) {
-			toneToPlay = R.raw.tone2;
-		} else {
-			toneToPlay = R.raw.tone3;
-		}
+	public void showNotifications(String shortTitle, String title, String message) {
 		SecurePreferences sp = new SecurePreferences(context);
 		long[] vibration;
 		if (sp.getBoolean("pref_vibration", false)) {
@@ -197,13 +191,15 @@ public class Utils {
 		} else {
 			vibration = new long[] { 0 };
 		}
+		SharedPreferences getAlarms = PreferenceManager.getDefaultSharedPreferences(context);
+		String alarms = getAlarms.getString("pref_notification", "default ringtone");
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		Intent myIntent = new Intent(context, AlertsActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		NotificationCompat.Builder myNotification = new NotificationCompat.Builder(context);
 		myNotification.setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis()).setContentIntent(pendingIntent).setAutoCancel(true)
-				.setSmallIcon(R.drawable.ic_launcher).setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + toneToPlay));
+				.setSmallIcon(R.drawable.ic_launcher).setSound(Uri.parse(alarms)).setVibrate(vibration);
 
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(999, myNotification.build());
@@ -215,7 +211,7 @@ public class Utils {
 			switch (am.getRingerMode()) {
 			case AudioManager.RINGER_MODE_SILENT:
 			case AudioManager.RINGER_MODE_VIBRATE:
-				playNotificationSound(toneToPlay);
+				playNotificationSound();
 				break;
 			}
 		}

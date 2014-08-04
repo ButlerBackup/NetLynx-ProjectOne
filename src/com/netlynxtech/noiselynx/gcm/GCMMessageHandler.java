@@ -43,6 +43,6 @@ public class GCMMessageHandler extends IntentService {
 	}
 
 	private void sendNotification(Bundle msg) {
-		new Utils(this).showNotifications(msg.getString("shorttitle"), msg.getString("longtitle"), msg.getString("body"), msg.getString("tone"));
+		new Utils(this).showNotifications(msg.getString("shorttitle"), msg.getString("longtitle"), msg.getString("body"));
 	}
 }

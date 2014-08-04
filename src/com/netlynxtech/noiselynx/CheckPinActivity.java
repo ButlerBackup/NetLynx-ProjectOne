@@ -22,7 +22,7 @@ public class CheckPinActivity extends SherlockActivity {
 	GoogleCloudMessaging gcm;
 	String GCM_register_ID = "";
 
-	EditText etPinNo;
+	EditText etPinNo, etPinNoAgain;
 	ActionProcessButton bCheckPin;
 	TextView tvError, tvGCMID, tvStatusDesc;
 
@@ -33,6 +33,7 @@ public class CheckPinActivity extends SherlockActivity {
 		setContentView(R.layout.check_pin_activity);
 		tvError = (TextView) findViewById(R.id.tvError);
 		etPinNo = (EditText) findViewById(R.id.etPinNo);
+		etPinNoAgain = (EditText) findViewById(R.id.etPinNoAgain);
 		tvGCMID = (TextView) findViewById(R.id.tvGCMID);
 		tvStatusDesc = (TextView) findViewById(R.id.tvStatusDesc);
 		bCheckPin = (ActionProcessButton) findViewById(R.id.bCheckPin);
@@ -86,9 +87,14 @@ public class CheckPinActivity extends SherlockActivity {
 					tvError.setVisibility(View.VISIBLE);
 					tvError.setText(CheckPinActivity.this.getString(R.string.gcm_id_retrieved_failed));
 				} else {
-					etPinNo.setEnabled(false);
-					bCheckPin.setEnabled(false);
-					progressGenerator.checkPin(bCheckPin, etPinNo.getText().toString(), GCM_register_ID, tvStatusDesc, CheckPinActivity.this);
+					if (etPinNo.getText().toString().equals(etPinNoAgain.getText().toString())) {
+						etPinNo.setEnabled(false);
+						bCheckPin.setEnabled(false);
+						progressGenerator.checkPin(bCheckPin, etPinNo.getText().toString(), GCM_register_ID, tvStatusDesc, CheckPinActivity.this);
+					} else {
+						tvError.setVisibility(View.VISIBLE);
+						tvError.setText("PIN do not match");
+					}
 				}
 			}
 		});
