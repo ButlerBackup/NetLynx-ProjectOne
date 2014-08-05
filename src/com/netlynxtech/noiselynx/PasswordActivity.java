@@ -14,7 +14,7 @@ import com.netlynxtech.noiselynx.classes.Utils;
 public class PasswordActivity extends SherlockActivity {
 	String password, message;
 	Button bSkip, bLogin;
-	EditText etPassword;
+	EditText etPassword, etPasswordAgain;
 	TextView tvPasswordInfo;
 
 	@Override
@@ -27,14 +27,16 @@ public class PasswordActivity extends SherlockActivity {
 		bSkip = (Button) findViewById(R.id.bSkip);
 		bLogin = (Button) findViewById(R.id.bLogin);
 		etPassword = (EditText) findViewById(R.id.etPassword);
+		etPasswordAgain = (EditText) findViewById(R.id.etPasswordAgain);
 		tvPasswordInfo = (TextView) findViewById(R.id.tvPasswordInfo);
 
 		password = new Utils(PasswordActivity.this).getPassword();
 		if (!password.equals("0")) { // already set password
-			if (password.equals("")) { // dont want password
+			if (password.equals("")) { // dont want password // skip for now
 				startActivity(new Intent(PasswordActivity.this, MonitoringSitesActivity.class));
 				finish();
 			} else { // user set a password, now prompt them!
+				etPasswordAgain.setVisibility(View.GONE);
 				bSkip.setVisibility(View.GONE);
 				tvPasswordInfo.setText(PasswordActivity.this.getResources().getString(R.string.password_info_text_existing));
 			}
@@ -47,10 +49,14 @@ public class PasswordActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				if (password.equals("0")) { // new user
-					if (etPassword.getText().toString().length() > 0) {
-						new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString().trim());
-						startActivity(new Intent(PasswordActivity.this, WelcomeActivity.class).putExtra("message", message));
-						finish();
+					if (etPassword.getText().toString().trim().length() > 0 && etPasswordAgain.getText().toString().trim().length() > 0) {
+						if (etPassword.getText().toString().trim().equals(etPasswordAgain.getText().toString().trim())) {
+							new Utils(PasswordActivity.this).setPassword(etPassword.getText().toString().trim());
+							startActivity(new Intent(PasswordActivity.this, WelcomeActivity.class).putExtra("message", message));
+							finish();
+						} else {
+							tvPasswordInfo.setText(PasswordActivity.this.getResources().getString(R.string.password_info_password_notequal));
+						}
 					} else {
 						tvPasswordInfo.setText(PasswordActivity.this.getResources().getString(R.string.password_info_password_null));
 					}

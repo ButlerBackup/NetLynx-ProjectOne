@@ -38,19 +38,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/etPinNoAgain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bCheckPin"
-        android:layout_alignLeft="@+id/bCheckPin"
-        android:layout_alignRight="@+id/bCheckPin"
-        android:ems="10"
-        android:hint="@string/pin_hint_again"
-        android:inputType="phone"
-        android:paddingBottom="10dp"
-        android:textSize="20sp" />
-
     <TextView
         android:id="@+id/tvGCMID"
         android:layout_width="wrap_content"
@@ -65,8 +52,8 @@
         android:id="@+id/etPinNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/etPinNoAgain"
-        android:layout_alignLeft="@+id/etPinNoAgain"
+        android:layout_above="@+id/bCheckPin"
+        android:layout_alignLeft="@+id/bCheckPin"
         android:layout_alignParentRight="true"
         android:ems="10"
         android:hint="@string/pin_hint"
