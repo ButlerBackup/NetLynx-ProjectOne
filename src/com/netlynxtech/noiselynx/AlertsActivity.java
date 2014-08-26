@@ -45,6 +45,15 @@ public class AlertsActivity extends SherlockActivity {
 	}
 
 	@Override
+	public void onBackPressed() {
+		if (fromNotification) {
+			startActivity(new Intent(AlertsActivity.this, MainActivity.class));
+		}
+		finish();
+		return;
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
