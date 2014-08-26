@@ -39,7 +39,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			}
 		});*/
 
-		Preference pref_test = (Preference) findPreference("pref_test");
+		/*Preference pref_test = (Preference) findPreference("pref_test");
 		pref_test.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 			@Override
@@ -47,7 +47,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 				new Utils(SettingsActivity.this).showNotifications("Noise level above threshold!", "Place2 : 80 dBA", "some other message");
 				return true;
 			}
-		});
+		});*/
 
 		Preference pref_about = (Preference) findPreference("pref_about");
 		pref_about.setOnPreferenceClickListener(new OnPreferenceClickListener() {
