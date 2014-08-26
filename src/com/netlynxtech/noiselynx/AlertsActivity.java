@@ -3,6 +3,7 @@ package com.netlynxtech.noiselynx;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -21,16 +22,25 @@ import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 public class AlertsActivity extends SherlockActivity {
 	private RefreshActionItem mRefreshActionItem;
 	ListView lvAlerts;
+	boolean fromNotification = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setTitle(getResources().getString(R.string.alert_name));
 		setContentView(R.layout.alert_activity); // same layout, different list item
 		lvAlerts = (ListView) findViewById(R.id.lvAlerts);
+		Intent i = getIntent();
+		try {
+			if (i.getStringExtra("notification").equals("true")) {
+				fromNotification = true;
+			}
+		} catch (Exception e) {
+
+		}
 		getAlerts();
 	}
 
@@ -38,6 +48,9 @@ public class AlertsActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
+			if (fromNotification) {
+				startActivity(new Intent(AlertsActivity.this, MainActivity.class));
+			}
 			finish();
 			break;
 		default:

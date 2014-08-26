@@ -195,8 +195,8 @@ public class Utils {
 		String alarms = getAlarms.getString("pref_notification", "default ringtone");
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		Intent myIntent = new Intent(context, AlertsActivity.class);
+		myIntent.putExtra("notification", "true");
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
-
 		NotificationCompat.Builder myNotification = new NotificationCompat.Builder(context);
 		myNotification.setContentTitle(title).setContentText(message).setTicker(shortTitle).setWhen(System.currentTimeMillis()).setContentIntent(pendingIntent).setAutoCancel(true)
 				.setSmallIcon(R.drawable.ic_launcher).setSound(Uri.parse(alarms)).setVibrate(vibration);
