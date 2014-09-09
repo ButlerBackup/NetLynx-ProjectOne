@@ -51,7 +51,7 @@ public class HistoryAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.history_activity_layout_items, null);
+			convertView = inflater.inflate(R.layout.history_activity_layout_items, parent, false);
 			holder = new ViewHolder();
 			holder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 			holder.tvLEQ = (TextView) convertView.findViewById(R.id.tvLEQ);

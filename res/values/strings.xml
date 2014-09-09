@@ -59,5 +59,9 @@
     <string name="password_activity_set_password">Set Password</string>
     <string name="pref_force_sound_title">Force Notification Sound</string>
     <string name="pref_force_sound_summary">Force notification sound even during Silent or Vibration mode</string>
-
+	<string name="pref_remote_reset_dialog_title">Secret Phrase</string>
+	<string name="pref_remote_reset_dialog_message">If ever your phone gets stolen, sending this secret phrase will reset the application so no changes can take place.</string>
+	<string name="pref_remote_reset_title">Remote Reset</string>
+	<string name="pref_remote_reset_summary">Set your secret phrase so that you can reset this application if your phone gets stolen.</string>
+	<string name="menu_graph">Show History Graph</string>
 </resources>

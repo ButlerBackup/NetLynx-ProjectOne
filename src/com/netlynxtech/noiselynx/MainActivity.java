@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -79,7 +78,6 @@ public class MainActivity extends SherlockActivity {
 		bRequestPin.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e("Button", "Click");
 				etPhoneNo.setEnabled(false);
 				bRequestPin.setEnabled(false);
 				progressGenerator.requestPin(bRequestPin, etPhoneNo.getText().toString(), MainActivity.this);

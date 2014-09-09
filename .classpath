@@ -9,5 +9,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Probook2/Desktop/eclipse/workspace/library_jars/gson-2.2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Probook2/Desktop/eclipse/workspace/library_jars/ion-1.2.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Probook2/Desktop/eclipse/workspace/library_jars/ksoap2-android-assembly-3.3.0-jar-with-dependencies.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Probook2/Desktop/eclipse/workspace/library_jars/androidplot-core-0.6.2-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

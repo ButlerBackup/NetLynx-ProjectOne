@@ -20,6 +20,7 @@ import com.manuelpeinado.refreshactionitem.ProgressIndicatorType;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 import com.netlynxtech.noiselynx.adapter.HistoryAdapter;
+import com.netlynxtech.noiselynx.classes.DataWrapper;
 import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 
 public class HistoryActivity extends SherlockActivity {
@@ -27,7 +28,9 @@ public class HistoryActivity extends SherlockActivity {
 	ListView lvHistory;
 	String deviceID, latitude, longitude;
 	Intent i;
-
+	ArrayList<HashMap<String, String>> historyData;
+	boolean canShowGraphMenu = false;
+	MenuItem itemGraph;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -72,6 +75,12 @@ public class HistoryActivity extends SherlockActivity {
 			in.putExtra(Consts.MONITORING_ALERT, i.getStringExtra(Consts.MONITORING_ALERT).toString());
 			startActivity(in);
 			break;
+		case R.id.menu_graph:
+			Intent i = new Intent(HistoryActivity.this, GraphActivity.class);
+			ArrayList<Number> mo = new WebRequestAPI(HistoryActivity.this).getHistoryNumbersOnly(historyData);
+			i.putExtra("data", new DataWrapper(mo));
+			startActivity(i);
+			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -81,6 +90,10 @@ public class HistoryActivity extends SherlockActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.history_menu, menu);
+		itemGraph = menu.findItem(R.id.menu_graph);
+		if (!canShowGraphMenu) {
+			itemGraph.setEnabled(false);
+		}
 		MenuItem item = menu.findItem(R.id.menu_refresh);
 		mRefreshActionItem = (RefreshActionItem) item.getActionView();
 		mRefreshActionItem.setMenuItem(item);
@@ -137,6 +150,9 @@ public class HistoryActivity extends SherlockActivity {
 							mRefreshActionItem.showProgress(false);
 						} catch (Exception e) {
 						}
+						canShowGraphMenu = true;
+						itemGraph.setEnabled(true);
+						supportInvalidateOptionsMenu();
 					}
 				});
 			}
@@ -145,7 +161,7 @@ public class HistoryActivity extends SherlockActivity {
 			protected Void doInBackground(Void... params) {
 				try {
 					data = new WebRequestAPI(HistoryActivity.this).getThreshold(deviceID);
-					Log.e("DEVICE ID", deviceID);
+					//Log.e("DEVICE ID", deviceID);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -157,7 +173,6 @@ public class HistoryActivity extends SherlockActivity {
 	private void getHistory() {
 		new AsyncTask<Void, Void, Void>() {
 			HistoryAdapter adapter;
-			ArrayList<HashMap<String, String>> data;
 
 			@Override
 			protected void onPostExecute(Void result) {
@@ -166,8 +181,8 @@ public class HistoryActivity extends SherlockActivity {
 
 					@Override
 					public void run() {
-						if (data != null) {
-							if (data.size() > 0) {
+						if (historyData != null) {
+							if (historyData.size() > 0) {
 								lvHistory.setAdapter(adapter);
 							} else {
 								Toast.makeText(HistoryActivity.this, "Unable to retreive data", Toast.LENGTH_SHORT).show();
@@ -185,9 +200,9 @@ public class HistoryActivity extends SherlockActivity {
 			protected Void doInBackground(Void... params) {
 				try {
 					// ArrayList<HashMap<String, String>> data = new WebRequestAPI(HistoryActivity.this).getDevices(new Utils(HistoryActivity.this).getUDID());
-					data = new WebRequestAPI(HistoryActivity.this).getHistory(deviceID);
+					historyData = new WebRequestAPI(HistoryActivity.this).getHistory(deviceID);
 					Log.e("DEVICE ID", deviceID);
-					adapter = new HistoryAdapter(HistoryActivity.this, data);
+					adapter = new HistoryAdapter(HistoryActivity.this, historyData);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -40,6 +40,13 @@ public class MonitoringSitesActivity extends SherlockActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				/*
+				 * new AsyncTask<Void, Void, Void>(){
+				 * 
+				 * @Override protected Void doInBackground(Void... params) { new WebRequestAPI(MonitoringSitesActivity.this).requestPin(); return null; }
+				 * 
+				 * }.execute();
+				 */
 				TextView tvID = (TextView) view.findViewById(R.id.tvID);
 				TextView tvLocation = (TextView) view.findViewById(R.id.tvDevice);
 				TextView tvTime = (TextView) view.findViewById(R.id.tvTime);

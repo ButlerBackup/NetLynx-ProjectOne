@@ -80,9 +80,9 @@ public class CheckPinActivity extends SherlockActivity {
 		bCheckPin.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e("Device ID", new Utils(CheckPinActivity.this).getDeviceId());
+				//Log.e("Device ID", new Utils(CheckPinActivity.this).getDeviceId());
 				if (GCM_register_ID.length() < 1) {
-					Log.e("Button", "No GCM ID. Cannot continue");
+					//Log.e("Button", "No GCM ID. Cannot continue");
 					tvError.setVisibility(View.VISIBLE);
 					tvError.setText(CheckPinActivity.this.getString(R.string.gcm_id_retrieved_failed));
 				} else {
@@ -139,7 +139,7 @@ public class CheckPinActivity extends SherlockActivity {
 						gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 					}
 					GCM_register_ID = gcm.register(Consts.PROJECT_NUMBER);
-					Log.e("RegisteredID", GCM_register_ID);
+					//Log.e("RegisteredID", GCM_register_ID);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -124,7 +124,9 @@ public class SQLFunctions {
 						hash.put(Consts.MESSAGES_MESSAGE_ID, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_ID)));
 						hash.put(Consts.MESSAGES_MESSAGE_TIMESTAMP, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_TIMESTAMP)));
 						hash.put(Consts.MESSAGES_MESSAGE_SUBJECT, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_SUBJECT)));
-						hash.put(Consts.MESSAGES_MESSAGE_BODY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_BODY)));
+						String t = cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_BODY));
+						String message = t.replaceAll("\\d+(\\.\\d{1,2})dB", "<font color='#FF0000'><b>$0</b></font>");
+						hash.put(Consts.MESSAGES_MESSAGE_BODY, message);
 						hash.put(Consts.MESSAGES_MESSAGE_PRIORITY, cursor.getString(cursor.getColumnIndex(Consts.MESSAGES_MESSAGE_PRIORITY)));
 						hash.put(Consts.DATABASE_COLUMN_UNIX, cursor.getString(cursor.getColumnIndex(Consts.DATABASE_COLUMN_UNIX)));
 						map.add(hash);

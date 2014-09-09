@@ -7,6 +7,12 @@ public class Consts {
 	// http://192.168.10.8/wsNoiseLynx/noiselynx.asmx'
 	//final static public String NOISELYNX_API_URL = "http://192.168.10.8/wsNoiseLynx/noiselynx.asmx";
 	final static public String NOISELYNX_API_URL = "http://210.193.23.250/wsNoiseLynx/noiselynx.asmx";
+	
+	/* TEST */
+	final static public String NOISELYNX_API_GETDEVICE_SOAP_ACTION = "http://NetlynxTech.com/GetDevice";
+	final static public String NOISELYNX_API_GETDEVICE_METHOD_NAME = "GetDevice";
+	/* TEST */
+	
 	final static public String NOISELYNX_API_REQUESTPIN_SOAP_ACTION = "http://NetlynxTech.com/RequestPIN";
 	final static public String NOISELYNX_API_REQUESTPIN_METHOD_NAME = "RequestPIN";
 	final static public String NOISELYNX_API_CHECKPIN_SOAP_ACTION = "http://NetlynxTech.com/CheckPIN";

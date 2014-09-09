@@ -17,6 +17,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <permission
         android:name="com.netlynxtech.noiselynx.permission.C2D_MESSAGE"
@@ -46,6 +48,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.netlynxtech.noiselynx.GraphActivity" >
+        </activity>
         <activity android:name="com.netlynxtech.noiselynx.CheckPinActivity" >
         </activity>
         <activity android:name="com.netlynxtech.noiselynx.AboutUsActivity" >
@@ -72,6 +76,11 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
                 <category android:name="com.netlynxtech.noiselynx" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.netlynxtech.noiselynx.SMSReceiver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 

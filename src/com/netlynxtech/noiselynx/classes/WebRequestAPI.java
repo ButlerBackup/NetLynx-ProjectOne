@@ -30,19 +30,19 @@ public class WebRequestAPI {
 	}
 
 	public String requestPin(String mobileNumber) {
-		SoapObject rpc = new SoapObject(Consts.NAMESPACE, Consts.NOISELYNX_API_REQUESTPIN_METHOD_NAME); //create new soap object
+		SoapObject rpc = new SoapObject(Consts.NAMESPACE, Consts.NOISELYNX_API_REQUESTPIN_METHOD_NAME); // create new soap object
 		rpc.addProperty("mobile_no", mobileNumber); // set parameter
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.dotNet = true;
 		envelope.setOutputSoapObject(rpc);
-		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL); //set base link
+		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL); // set base link
 		ht.debug = true;
 		try {
-			////Log.e("WebRequest", "TRY!");
+			// //Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_REQUESTPIN_SOAP_ACTION, envelope); // call web request
-			//System.err.println(ht.responseDump);
+			// System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse(); // get response
-			//Log.e("RESULT", result.toString());
+			// Log.e("RESULT", result.toString());
 			// Log.e("COUNT", result.getPropertyCount() + "");
 			// Log.e("COUNT", result.getProperty(0).toString());
 			if (result.getProperty(0).toString().equals("1")) {
@@ -78,9 +78,9 @@ public class WebRequestAPI {
 		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL);
 		ht.debug = true;
 		try {
-			//Log.e("WebRequest", "TRY!");
+			// Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_CHECKPIN_SOAP_ACTION, envelope);
-			//System.err.println(ht.responseDump);
+			// System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse();
 			// Log.e("COUNT", result.getPropertyCount() + "");
 			// Log.e("COUNT", result.getProperty(0).toString());
@@ -114,9 +114,9 @@ public class WebRequestAPI {
 		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL);
 		ht.debug = true;
 		try {
-			//Log.e("WebRequest", "TRY!");
+			// Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_GETDEVICES_SOAP_ACTION, envelope);
-			//System.err.println(ht.responseDump);
+			// System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse();
 			HashMap<String, String> map;
 			for (int i = 0; i < result.getPropertyCount(); i++) {
@@ -140,7 +140,7 @@ public class WebRequestAPI {
 		} catch (SocketTimeoutException e) {
 			e.printStackTrace();
 			// Toast.makeText(context, "Timed out. Please try again", Toast.LENGTH_SHORT).show();
-			
+
 		} catch (HttpResponseException e) {
 			e.printStackTrace();
 			// return e.getMessage();
@@ -166,9 +166,9 @@ public class WebRequestAPI {
 		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL);
 		ht.debug = true;
 		try {
-			//Log.e("WebRequest", "TRY!");
+			// Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_GETMESSAGES_SOAP_ACTION, envelope);
-			//System.err.println(ht.responseDump);
+			// System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse();
 			HashMap<String, String> map;
 			for (int i = 0; i < result.getPropertyCount(); i++) {
@@ -196,6 +196,15 @@ public class WebRequestAPI {
 		}
 	}
 
+	public ArrayList<Number> getHistoryNumbersOnly(ArrayList<HashMap<String, String>> data) {
+		ArrayList<Number> res = new ArrayList<Number>();
+		for (HashMap<String, String> s : data) {
+			res.add(Double.parseDouble(s.get(Consts.MONITORING_LEQ_FIVE_MINUTES)));
+			Log.e("HISTORY", s.get(Consts.MONITORING_LEQ_FIVE_MINUTES));
+		}
+		return res;
+	}
+
 	public ArrayList<HashMap<String, String>> getHistory(String deviceID) {
 		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 		SoapObject rpc = new SoapObject(Consts.NAMESPACE, Consts.NOISELYNX_API_GETHISTORY_METHOD_NAME);
@@ -206,9 +215,9 @@ public class WebRequestAPI {
 		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL, Consts.WEBREQUEST_TIMEOUT); // 20 seconds timeout
 		ht.debug = true;
 		try {
-			//Log.e("WebRequest", "TRY!");
+			// Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_GETHISTORY_SOAP_ACTION, envelope);
-			//System.err.println(ht.responseDump);
+			// System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse();
 			HashMap<String, String> map;
 			for (int i = 0; i < result.getPropertyCount(); i++) {
@@ -246,9 +255,9 @@ public class WebRequestAPI {
 		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL);
 		ht.debug = true;
 		try {
-			//Log.e("WebRequest", "TRY!");
+			// Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_GETTHRESHOLD_SOAP_ACTION, envelope);
-			//System.err.println(ht.responseDump);
+			// System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse();
 			for (int i = 0; i < result.getPropertyCount(); i++) {
 				SoapObject object = (SoapObject) result.getProperty(i);
@@ -275,9 +284,9 @@ public class WebRequestAPI {
 		HttpTransportSE ht = new HttpTransportSE(Consts.NOISELYNX_API_URL, Consts.WEBREQUEST_TIMEOUT); // 20 seconds timeout
 		ht.debug = true;
 		try {
-			//Log.e("WebRequest", "TRY!");
+			// Log.e("WebRequest", "TRY!");
 			ht.call(Consts.NOISELYNX_API_UPDATELATLONG_SOAP_ACTION, envelope);
-			//System.err.println(ht.responseDump);
+			// System.err.println(ht.responseDump);
 			SoapObject result = (SoapObject) envelope.getResponse();
 			if (result.getProperty(0).toString().equals("1")) {
 				return "success|" + result.getProperty(1).toString();
@@ -298,6 +307,45 @@ public class WebRequestAPI {
 			// return e.getMessage();
 		}
 		return "failed";
+	}
+
+	public String requestPin() {
+		SoapObject rpc = new SoapObject(Consts.NAMESPACE, "GetDevice"); // create new soap object
+		rpc.addProperty("UDID", "1234567890"); // set parameter
+		Log.e("UDID", "1234567890");
+		rpc.addProperty("deviceID", "51235000031111"); // set parameter
+		Log.e("DEVICEID", "51235000031111");
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.dotNet = true;
+		envelope.setOutputSoapObject(rpc);
+		HttpTransportSE ht = new HttpTransportSE("http://192.168.10.8/wsIOT/TH.asmx"); // set base link
+		ht.debug = true;
+		try {
+			// //Log.e("WebRequest", "TRY!");
+			ht.call("http://NetLynxTech.com/GetDevice", envelope); // call web request
+			System.err.println(ht.responseDump);
+			SoapObject result = (SoapObject) envelope.getResponse(); // get response
+			// Log.e("RESULT", result.toString());
+			// Log.e("COUNT", result.getPropertyCount() + "");
+			// Log.e("COUNT", result.getProperty(0).toString());
+			if (result.getProperty(0).toString().equals("1")) {
+				return "success";
+			} else {
+				return result.getProperty(1).toString();
+			}
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			return "Timed out. Please try again.";
+		} catch (HttpResponseException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
 	}
 
 }

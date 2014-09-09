@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class AlertsAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.alert_item, null);
+			convertView = inflater.inflate(R.layout.alert_item, parent, false);
 			holder = new ViewHolder();
 			holder.tvMessageID = (TextView) convertView.findViewById(R.id.tvMessageID);
 			holder.tvTime = (TextView) convertView.findViewById(R.id.tvMessageTime);
@@ -69,7 +70,7 @@ public class AlertsAdapter extends BaseAdapter {
 		holder.tvMessageID.setText(item.get(Consts.MESSAGES_MESSAGE_ID));
 		holder.tvTime.setText(new Utils(context).parseDatetime(item.get(Consts.MESSAGES_MESSAGE_TIMESTAMP)));
 		holder.tvSubject.setText(item.get(Consts.MESSAGES_MESSAGE_SUBJECT));
-		holder.tvMessage.setText(item.get(Consts.MESSAGES_MESSAGE_BODY));
+		holder.tvMessage.setText(Html.fromHtml(item.get(Consts.MESSAGES_MESSAGE_BODY)));
 		if (item.get(Consts.MESSAGES_MESSAGE_PRIORITY).equals(Consts.MONITORING_ALERT_YES)) {
 			holder.rl_alert_items.setBackgroundResource(R.drawable.card_alert);
 		} else {

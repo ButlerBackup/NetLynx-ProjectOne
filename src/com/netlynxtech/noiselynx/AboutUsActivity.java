@@ -9,7 +9,6 @@ import com.actionbarsherlock.view.MenuItem;
 public class AboutUsActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -20,7 +19,7 @@ public class AboutUsActivity extends SherlockActivity {
 			v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName; // get version of this package (in manifest)
 			((TextView) findViewById(R.id.tvVersion)).setText(AboutUsActivity.this.getResources().getString(R.string.version) + " " + v);
 		} catch (Exception e) {
-			((TextView) findViewById(R.id.tvVersion)).setText(AboutUsActivity.this.getResources().getString(R.string.version) + " 1.0.0"); //else v1.0.0
+			((TextView) findViewById(R.id.tvVersion)).setText(AboutUsActivity.this.getResources().getString(R.string.version) + " 1.0.0"); // else v1.0.0
 		}
 	}
 

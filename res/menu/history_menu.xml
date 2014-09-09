@@ -13,5 +13,8 @@
         android:icon="@drawable/ic_action_map"
         android:showAsAction="always"
         android:title="@string/menu_map_text"/>
-
-</menu>
+    <item
+        android:id="@+id/menu_graph"
+         android:showAsAction="ifRoom"
+        android:title="@string/menu_graph"/>
+</menu>
