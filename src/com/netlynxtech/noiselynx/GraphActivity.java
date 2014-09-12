@@ -12,6 +12,7 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.netlynxtech.noiselynx.classes.DataWrapper;
+import com.netlynxtech.noiselynx.classes.GraphActivityXAxisFormat;
 
 public class GraphActivity extends SherlockActivity {
 
@@ -21,7 +22,8 @@ public class GraphActivity extends SherlockActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
-		ArrayList<Number> list = dw.getParliaments();
+		ArrayList<Number> yAxisData = dw.getYAxis();
+		ArrayList<String> xAxisData = dw.getXAxis();
 		// fun little snippet that prevents users from taking screenshots
 		// on ICS+ devices :-)
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
@@ -30,9 +32,11 @@ public class GraphActivity extends SherlockActivity {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		// initialize our XYPlot reference:
 		plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
+		plot.setDomainLabel("Time");
+		plot.getGraphWidget().setDomainValueFormat(new GraphActivityXAxisFormat(xAxisData));
 
 		// Turn the above arrays into XYSeries':
-		XYSeries series1 = new SimpleXYSeries(list, // SimpleXYSeries takes a List so turn our array into a List
+		XYSeries series1 = new SimpleXYSeries(yAxisData, // SimpleXYSeries takes a List so turn our array into a List
 				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
 				"Decibels"); // Set the display title of the series
 

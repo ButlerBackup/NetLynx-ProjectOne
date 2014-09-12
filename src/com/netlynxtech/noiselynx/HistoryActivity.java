@@ -78,7 +78,8 @@ public class HistoryActivity extends SherlockActivity {
 		case R.id.menu_graph:
 			Intent i = new Intent(HistoryActivity.this, GraphActivity.class);
 			ArrayList<Number> mo = new WebRequestAPI(HistoryActivity.this).getHistoryNumbersOnly(historyData);
-			i.putExtra("data", new DataWrapper(mo));
+			ArrayList<String> co = new WebRequestAPI(HistoryActivity.this).getHistoryXAxisOnly(historyData);
+			i.putExtra("data", new DataWrapper(mo, co));
 			startActivity(i);
 			break;
 		default:

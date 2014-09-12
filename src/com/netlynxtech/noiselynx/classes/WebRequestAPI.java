@@ -200,7 +200,22 @@ public class WebRequestAPI {
 		ArrayList<Number> res = new ArrayList<Number>();
 		for (HashMap<String, String> s : data) {
 			res.add(Double.parseDouble(s.get(Consts.MONITORING_LEQ_FIVE_MINUTES)));
-			Log.e("HISTORY", s.get(Consts.MONITORING_LEQ_FIVE_MINUTES));
+			// Log.e("HISTORY", s.get(Consts.MONITORING_LEQ_FIVE_MINUTES));
+		}
+		return res;
+	}
+
+	public ArrayList<String> getHistoryXAxisOnly(ArrayList<HashMap<String, String>> data) {
+		ArrayList<String> res = new ArrayList<String>();
+		for (HashMap<String, String> s : data) {
+			try {
+				String[] mins = s.get(Consts.HISTORY_DATETIMESTAMP).split("T");
+				String[] finalMins = mins[1].split(":");
+				res.add(finalMins[0] + ":" + finalMins[1]);
+				// Log.e("HISTORY", finalMins[0] + ":" + finalMins[1]);
+			} catch (Exception e) {
+
+			}
 		}
 		return res;
 	}
