@@ -64,4 +64,5 @@
 	<string name="pref_remote_reset_title">Remote Reset</string>
 	<string name="pref_remote_reset_summary">Set your secret phrase so that you can reset this application if your phone gets stolen.</string>
 	<string name="menu_graph">Show History Graph</string>
+	<string name="ads">ca-app-pub-1733972909565070/5650459747</string>
 </resources>

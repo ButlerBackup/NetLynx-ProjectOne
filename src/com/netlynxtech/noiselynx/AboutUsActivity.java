@@ -5,8 +5,12 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class AboutUsActivity extends SherlockActivity {
+	AdView adView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -14,6 +18,9 @@ public class AboutUsActivity extends SherlockActivity {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setTitle(getResources().getString(R.string.about_us_activity));
 		setContentView(R.layout.about_us_activity);
+		adView = (AdView) findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
 		String v = "1";
 		try {
 			v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName; // get version of this package (in manifest)
@@ -34,4 +41,30 @@ public class AboutUsActivity extends SherlockActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    /** Called when returning to the activity */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    /** Called before the activity is destroyed */
+    @Override
+    public void onDestroy() {
+        if (adView != null) {
+			adView.destroy();
+        }
+        super.onDestroy();
+    }
 }

@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.manuelpeinado.refreshactionitem.ProgressIndicatorType;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
@@ -31,6 +33,7 @@ public class HistoryActivity extends SherlockActivity {
 	ArrayList<HashMap<String, String>> historyData;
 	boolean canShowGraphMenu = false;
 	MenuItem itemGraph;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -162,7 +165,7 @@ public class HistoryActivity extends SherlockActivity {
 			protected Void doInBackground(Void... params) {
 				try {
 					data = new WebRequestAPI(HistoryActivity.this).getThreshold(deviceID);
-					//Log.e("DEVICE ID", deviceID);
+					// Log.e("DEVICE ID", deviceID);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

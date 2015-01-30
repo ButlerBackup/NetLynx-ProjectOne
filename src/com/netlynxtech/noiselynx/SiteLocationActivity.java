@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -30,6 +32,7 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 	private GoogleMap googleMap;
 	double latitude, longitude;
 	String locationName = "", deviceID = "";
+	AdView adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.site_location_activity);
+		adView = (AdView) findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
 		Intent i = getIntent();
 		locationName = i.getStringExtra(Consts.MONITORING_LOCATION);
 		deviceID = i.getStringExtra(Consts.MONITORING_DEVICE_ID);
@@ -130,6 +136,9 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (adView != null) {
+			adView.resume();
+		}
 		initilizeMap();
 	}
 
@@ -183,4 +192,20 @@ public class SiteLocationActivity extends SherlockFragmentActivity {
 
 	}
 
+	@Override
+	public void onPause() {
+		if (adView != null) {
+			adView.pause();
+		}
+		super.onPause();
+	}
+
+	/** Called before the activity is destroyed */
+	@Override
+	public void onDestroy() {
+		if (adView != null) {
+			adView.destroy();
+		}
+		super.onDestroy();
+	}
 }

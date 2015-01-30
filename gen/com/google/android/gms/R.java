@@ -103,29 +103,29 @@ public final class R {
 		public static final int powered_by_google_light = 0x7f020099;
 	}
 	public static final class id {
-		public static final int book_now = 0x7f070010;
-		public static final int buyButton = 0x7f07000a;
-		public static final int buy_now = 0x7f07000f;
-		public static final int buy_with_google = 0x7f07000e;
-		public static final int classic = 0x7f070011;
-		public static final int grayscale = 0x7f070012;
-		public static final int holo_dark = 0x7f070005;
-		public static final int holo_light = 0x7f070006;
-		public static final int hybrid = 0x7f070004;
-		public static final int match_parent = 0x7f07000c;
-		public static final int monochrome = 0x7f070013;
-		public static final int none = 0x7f070000;
-		public static final int normal = 0x7f070001;
-		public static final int production = 0x7f070007;
-		public static final int sandbox = 0x7f070008;
-		public static final int satellite = 0x7f070002;
-		public static final int selectionDetails = 0x7f07000b;
-		public static final int strict_sandbox = 0x7f070009;
-		public static final int terrain = 0x7f070003;
-		public static final int wrap_content = 0x7f07000d;
+		public static final int book_now = 0x7f0b0014;
+		public static final int buyButton = 0x7f0b0010;
+		public static final int buy_now = 0x7f0b0015;
+		public static final int buy_with_google = 0x7f0b0016;
+		public static final int classic = 0x7f0b0017;
+		public static final int grayscale = 0x7f0b0018;
+		public static final int holo_dark = 0x7f0b000b;
+		public static final int holo_light = 0x7f0b000c;
+		public static final int hybrid = 0x7f0b0006;
+		public static final int match_parent = 0x7f0b0012;
+		public static final int monochrome = 0x7f0b0019;
+		public static final int none = 0x7f0b0007;
+		public static final int normal = 0x7f0b0008;
+		public static final int production = 0x7f0b000d;
+		public static final int sandbox = 0x7f0b000e;
+		public static final int satellite = 0x7f0b0009;
+		public static final int selectionDetails = 0x7f0b0011;
+		public static final int strict_sandbox = 0x7f0b000f;
+		public static final int terrain = 0x7f0b000a;
+		public static final int wrap_content = 0x7f0b0013;
 	}
 	public static final class integer {
-		public static final int google_play_services_version = 0x7f080000;
+		public static final int google_play_services_version = 0x7f070000;
 	}
 	public static final class string {
 		public static final int auth_client_needs_enabling_title = 0x7f050001;
@@ -162,10 +162,10 @@ public final class R {
 		public static final int wallet_buy_button_place_holder = 0x7f05001f;
 	}
 	public static final class style {
-		public static final int WalletFragmentDefaultButtonTextAppearance = 0x7f090002;
-		public static final int WalletFragmentDefaultDetailsHeaderTextAppearance = 0x7f090001;
-		public static final int WalletFragmentDefaultDetailsTextAppearance = 0x7f090000;
-		public static final int WalletFragmentDefaultStyle = 0x7f090003;
+		public static final int WalletFragmentDefaultButtonTextAppearance = 0x7f080002;
+		public static final int WalletFragmentDefaultDetailsHeaderTextAppearance = 0x7f080001;
+		public static final int WalletFragmentDefaultDetailsTextAppearance = 0x7f080000;
+		public static final int WalletFragmentDefaultStyle = 0x7f080003;
 	}
 	public static final class styleable {
 		public static final int[] AdsAttrs = { 0x7f010000, 0x7f010001, 0x7f010002 };

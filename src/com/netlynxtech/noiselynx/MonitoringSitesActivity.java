@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.manuelpeinado.refreshactionitem.ProgressIndicatorType;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
@@ -26,6 +28,7 @@ import com.netlynxtech.noiselynx.classes.WebRequestAPI;
 public class MonitoringSitesActivity extends SherlockActivity {
 	private RefreshActionItem mRefreshActionItem;
 	ListView lvMonitoringSite;
+	AdView adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +39,14 @@ public class MonitoringSitesActivity extends SherlockActivity {
 			finish();
 		}
 		lvMonitoringSite = (ListView) findViewById(R.id.lvMonitoringSite);
+		adView = (AdView) findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
+
 		lvMonitoringSite.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				/*
-				 * new AsyncTask<Void, Void, Void>(){
-				 * 
-				 * @Override protected Void doInBackground(Void... params) { new WebRequestAPI(MonitoringSitesActivity.this).requestPin(); return null; }
-				 * 
-				 * }.execute();
-				 */
 				TextView tvID = (TextView) view.findViewById(R.id.tvID);
 				TextView tvLocation = (TextView) view.findViewById(R.id.tvDevice);
 				TextView tvTime = (TextView) view.findViewById(R.id.tvTime);
@@ -71,12 +71,14 @@ public class MonitoringSitesActivity extends SherlockActivity {
 		});
 		// setContentView(R.layout.progress_loading);
 		// ViewGroupUtils.replaceView(findViewById(R.layout.monitoring_sites_activity), findViewById(R.layout.progress_loading));
-		getDevices();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (adView != null) {
+			adView.resume();
+		}
 		getDevices();
 	}
 

@@ -11,6 +11,8 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.manuelpeinado.refreshactionitem.ProgressIndicatorType;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
@@ -23,6 +25,7 @@ public class AlertsActivity extends SherlockActivity {
 	private RefreshActionItem mRefreshActionItem;
 	ListView lvAlerts;
 	boolean fromNotification = false;
+	AdView adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +36,16 @@ public class AlertsActivity extends SherlockActivity {
 		getSupportActionBar().setTitle(getResources().getString(R.string.alert_name));
 		setContentView(R.layout.alert_activity); // same layout, different list item
 		lvAlerts = (ListView) findViewById(R.id.lvAlerts);
+		adView = (AdView) findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
 		Intent i = getIntent();
 		try {
 			if (i.getStringExtra("notification").equals("true")) {
 				fromNotification = true;
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		getAlerts();
 	}
@@ -139,5 +145,31 @@ public class AlertsActivity extends SherlockActivity {
 				return null;
 			}
 		}.execute(null, null, null);
+	}
+
+	@Override
+	public void onPause() {
+		if (adView != null) {
+			adView.pause();
+		}
+		super.onPause();
+	}
+
+	/** Called when returning to the activity */
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (adView != null) {
+			adView.resume();
+		}
+	}
+
+	/** Called before the activity is destroyed */
+	@Override
+	public void onDestroy() {
+		if (adView != null) {
+			adView.destroy();
+		}
+		super.onDestroy();
 	}
 }

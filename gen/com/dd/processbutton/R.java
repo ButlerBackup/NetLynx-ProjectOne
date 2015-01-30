@@ -30,8 +30,8 @@ public final class R {
 		public static final int red_error = 0x7f060021;
 	}
 	public static final class dimen {
-		public static final int corner_radius = 0x7f0b000f;
-		public static final int layer_padding = 0x7f0b0010;
+		public static final int corner_radius = 0x7f0a000f;
+		public static final int layer_padding = 0x7f0a0010;
 	}
 	public static final class drawable {
 		public static final int rect_complete = 0x7f02009a;

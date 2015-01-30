@@ -171,7 +171,6 @@
             android:text="@string/dba"
             android:textAppearance="?android:attr/textAppearanceMedium"
             font:customFont="roboto.ttf" />
-
     </RelativeLayout>
 
     <RelativeLayout
